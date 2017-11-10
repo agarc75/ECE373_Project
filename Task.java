@@ -1,20 +1,23 @@
 import java.util.ArrayList:
 import java.io.Serializable;
 
-public class Task implements Serializable{
+public class Task implements Serializable
+{
 	private String name;
 	private User creater;
 	private ArrayList<User> users;
 	private User currentuser;
 	
-	public Task(){
+	public Task()
+	{
 		name = "";
 		creater = null;
 		Users = new ArrayList<User>();
 		currentuser = null;
 	}
 	
-	public Task(String name, User creater){
+	public Task(String name, User creater)
+	{
 		this.name = name;
 		this.creater = creater;
 		Users = new ArrayList<User>();
@@ -22,56 +25,71 @@ public class Task implements Serializable{
 		Users.add(creater);
 	}
 	
-	public void setName(String name){
+	public void setName(String name)
+	{
 		this.name = name;
 	}
 	
-	public String getName(){
+	public String getName()
+	{
 		return this.name;
 	}
 	
-	public void setCreater(User creater){
+	public void setCreater(User creater)
+	{
 		this.creater = creater;
 	}
 	
-	public User getCreater(){
+	public User getCreater()
+	{
 		return this.creater;
 	}
 	
-	public ArrayList<User> getUserList(){
+	public ArrayList<User> getUserList()
+	{
 		return this.users;
 	}
 	
-	public void setCurrentUser(User user){
+	public void setCurrentUser(User user)
+	{
 		this.currentuser = user;
 	}
 	
-	public User getCurrentUser(){
+	public User getCurrentUser()
+	{
 		return this.currentuser;
 	}
 	
-	public boolean addUser(User user){
-		if (this.users.contains(user)){
+	public boolean addUser(User user)
+	{
+		if (this.users.contains(user))
+		{
 			return false;
 		}
-		else{
+		else
+		{
 			this.users.add(user);
 			return true;
 		}
 	}
 	
-	public boolean removeUser(User user){
-		if(this.uses.contains(user)){
+	public boolean removeUser(User user)
+	{
+		if(this.uses.contains(user))
+		{
 			this.users.remove(user);
 			return true;
 		}
-		else{
+		else
+		{
 			return false;
 		}
 	}
 	
-	public void changeOrder(int pos, User user){
-		if(this.users.removeUser(user) && pos < this.users.size() ){
+	public void changeOrder(int pos, User user)
+	{
+		if(this.users.removeUser(user) && pos < this.users.size() )
+		{
 			this.users.add(pos, user);
 		}
 	}
