@@ -1,7 +1,10 @@
-package software;
 import java.util.HashMap;
-import people.User;
 import java.io.Serializable;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 
 public class Turns implements Serializable
@@ -43,9 +46,65 @@ public class Turns implements Serializable
 	{
 		User someUser = null;
 		
-		//missing hella code bruuuuv!!!!!//
+		for (someUser: users.values())
+		{
+			if (someUser.getEmail().equals(email))
+			{
+				return someUser;
+			}
+		}
 		
-		return someUser;
+		return null;
+	}
+	
+	public static void saveData(Turns turns)
+	{
+		FileOutputStream outFile = null;
+		ObjectOutputStream outObject = null;
+		
+		try
+		{
+			outFile = new FileOutputStream("Turns.ser");
+			outObject = new ObjectOutputStream(outFile);
+			
+			outObject.writeObject(turns);
+			
+			outObject.close();
+			outFile.close();
+		}
+		catch (IOException i)
+		{
+			i.printStackTrace();
+		}
+	}
+	
+	public static Turns loadData()
+	{
+		FileInputStream inFile = null;
+		ObjectInputStream inObject = null;
+		
+		Turns turns = null;
+		
+		try
+		{
+			inFile = new FileInputStream("Turns.ser");
+			inObject = new ObjectInputStream(inFile);
+			
+			turns = (Turns) inObject.readObject();
+			
+			inObject.close();
+			inFile.close();
+		}
+		catch (IOException i)
+		{
+			i.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		
+		return turns;
 	}
 	
 }
