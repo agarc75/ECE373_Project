@@ -2,12 +2,27 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
+import javafx.event.ActionEvent;
+
 public class LoginGUI extends JFrame
 {	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Turns turn;
+	
+	//** GUI Components
+	//Ending Labels
+	private JLabel forgotPasswordLabel = new JLabel("Forgot Password?");
+	private JLabel newUserLabel = new JLabel("New User");
+	
 	
 	public LoginGUI (Turns turn) 
 	{
@@ -20,9 +35,6 @@ public class LoginGUI extends JFrame
 		buildGUI();
 		
 		setVisible(true);
-		
-		
-		
 	}
 	
 	public void buildGUI()
@@ -32,8 +44,6 @@ public class LoginGUI extends JFrame
 		
 		c.fill = GridBagConstraints.HORIZONTAL;
 		
-				
-				
 		//Text Fields
 		JLabel userNameLabel = new JLabel("Username: ");
 		JTextField userNameField = new JTextField(10);
@@ -43,10 +53,10 @@ public class LoginGUI extends JFrame
 		//Buttons
 		JButton loginButton = new JButton("login");
 		
+		//Action Listeners
+		newUserLabel.addMouseListener(new linkListener());
+		forgotPasswordLabel.addMouseListener(new linkListener());
 		
-		//Ending Labels
-		JLabel forgotPasswordLabel = new JLabel("Forgot Password?");
-		JLabel newUserLabel = new JLabel("New User");
 		
 		c.ipady = 5;
 		
@@ -92,6 +102,42 @@ public class LoginGUI extends JFrame
 		add(turnsLogin);
 	}
 	
+	private class linkListener implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			JLabel source = (JLabel)(e.getSource());
+			if(source.equals(forgotPasswordLabel))
+				System.out.println("Forgot Password?");
+			if(source.equals(newUserLabel))
+				System.out.println("Welcome!");
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			//TODO
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+	}
 	
 	
 }
