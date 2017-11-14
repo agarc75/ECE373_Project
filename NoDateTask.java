@@ -1,4 +1,4 @@
-package Tasks;
+//package Tasks;
 import java.io.Serializable;
 
 public class NoDateTask extends Task implements Serializable
@@ -14,8 +14,7 @@ public class NoDateTask extends Task implements Serializable
 	
 	public NoDateTask(String aname, User acreator, int cycletime)
 	{
-		this.name = aname;
-		this.creator = acreator;
+		super(aname, acreator);
 		this.cyclelimit = cycletime;
 	}
 	

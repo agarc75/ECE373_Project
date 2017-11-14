@@ -60,7 +60,7 @@ public class User implements Serializable
 	
 	public boolean addGroup(Group group)
 	{
-		return groups.add(groups);
+		return groups.add(group);
 	}
 	
 	public boolean removeGroup(Group group)
