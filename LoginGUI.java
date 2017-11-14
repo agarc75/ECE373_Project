@@ -73,26 +73,30 @@ public class LoginGUI extends JFrame
 		
 		
 		c.ipady = 5;
-		c.fill = GridBagConstraints.CENTER;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		c.weighty = 0.3;
 		
+		turnsLogin.add(new JPanel(), c);
+		
+		c.weighty = 1;
 		c.weightx = 2;
 		c.gridx = 0;
-	    c.gridy = 0;
+	    c.gridy = 1;
 		turnsLogin.add(userNameLabel, c);
 		
 		c.weightx = 2;
 		c.gridx = 1;
-	    c.gridy = 0;
+	    c.gridy = 1;
 		turnsLogin.add(userNameField, c);
 		
 		c.weightx = 0.5;
 		c.gridx = 0;
-	    c.gridy = 1;
+	    c.gridy = 2;
 		turnsLogin.add(passwordLabel, c);
 		
 		c.weightx = 0.5;
 		c.gridx = 1;
-	    c.gridy = 1;
+	    c.gridy = 2;
 		turnsLogin.add(passwordField, c);
 	
 		c.fill = GridBagConstraints.LINE_END;
@@ -100,19 +104,19 @@ public class LoginGUI extends JFrame
 		c.ipady = 3;
 		c.ipadx = 15;
 		c.gridx = 1;
-	    c.gridy = 2;
+	    c.gridy = 3;
 		turnsLogin.add(loginButton, c);
 		
-		c.weighty = 1;
+		c.weighty = 10;
 		
 		c.weightx = 0.5;
 		c.gridx = 0;
-	    c.gridy = 5;
+	    c.gridy = 6;
 		turnsLogin.add(forgotPasswordLabel, c);
 		
 		c.weightx = 0.5;
 		c.gridx = 1;
-	    c.gridy = 5;
+	    c.gridy = 6;
 		turnsLogin.add(newUserLabel, c);
 		
 		
@@ -164,9 +168,9 @@ public class LoginGUI extends JFrame
 		JLabel emailLabel = new JLabel("Email: ");
 		JTextField emailField = new JTextField(10);
 		JLabel passwordLabel = new JLabel("Password");
-		JTextField passwordField = new JTextField(10);
+		JPasswordField passwordField = new JPasswordField(10);
 		JLabel confirmLabel = new JLabel("Confirm Password: ");
-		JTextField confirmField = new JTextField(10);
+		JPasswordField confirmField = new JPasswordField(10);
 		
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
