@@ -1,4 +1,4 @@
-import java.util.ArrayList:
+import java.util.ArrayList;
 import java.io.Serializable;
 
 public class Task implements Serializable
@@ -12,7 +12,7 @@ public class Task implements Serializable
 	{
 		name = "";
 		creater = null;
-		Users = new ArrayList<User>();
+		users = new ArrayList<User>();
 		currentuser = null;
 	}
 	
@@ -20,9 +20,9 @@ public class Task implements Serializable
 	{
 		this.name = name;
 		this.creater = creater;
-		Users = new ArrayList<User>();
+		users = new ArrayList<User>();
 		currentuser = null;
-		Users.add(creater);
+		users.add(creater);
 	}
 	
 	public void setName(String name)
@@ -75,7 +75,7 @@ public class Task implements Serializable
 	
 	public boolean removeUser(User user)
 	{
-		if(this.uses.contains(user))
+		if(this.users.contains(user))
 		{
 			this.users.remove(user);
 			return true;
@@ -88,7 +88,7 @@ public class Task implements Serializable
 	
 	public void changeOrder(int pos, User user)
 	{
-		if(this.users.removeUser(user) && pos < this.users.size() )
+		if(this.removeUser(user) && pos < this.users.size() )
 		{
 			this.users.add(pos, user);
 		}
