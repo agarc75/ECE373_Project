@@ -1,4 +1,3 @@
-package people;
 import java.util.ArrayList;
 import java.io.Serializable;
 
