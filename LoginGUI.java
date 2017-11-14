@@ -2,10 +2,15 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import javafx.event.ActionEvent;
@@ -38,7 +43,16 @@ public class LoginGUI extends JFrame
 	}
 	
 	public void buildGUI()
-	{
+	{	
+		//Changes Java Icon to Turns logo
+		try {
+		    setIconImage(ImageIO.read(new File("ECE373_Project/GUIItems/appLogo.PNG")));
+		}
+		catch (IOException exc) {
+		    exc.printStackTrace();
+		}
+		
+		
 		JPanel turnsLogin = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -59,7 +73,7 @@ public class LoginGUI extends JFrame
 		
 		
 		c.ipady = 5;
-		c.fill = GridBagConstraints.HORIZONTAL;
+		c.fill = GridBagConstraints.CENTER;
 		
 		c.weightx = 2;
 		c.gridx = 0;
