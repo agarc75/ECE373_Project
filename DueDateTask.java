@@ -1,7 +1,7 @@
-package Tasks;
+//package Tasks;
 
 import java.util.Date;
-import people.User;
+//import people.User;
 import java.io.Serializable;
 
 public class DueDateTask extends Task implements Serializable
@@ -19,10 +19,9 @@ public class DueDateTask extends Task implements Serializable
 	
 	public DueDateTask(String aname, User acreator, Date duedate)
 	{
+		super(aname, acreator);
 		this.duedate = duedate;
 		this.status = false;
-		this.name = aname;
-		this.creator = acreator;
 	}
 	
 	

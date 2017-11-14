@@ -44,9 +44,7 @@ public class Turns implements Serializable
 	
 	public User findUserEmail(String email)
 	{
-		User someUser = null;
-		
-		for (someUser: users.values())
+		for (User someUser: users.values())
 		{
 			if (someUser.getEmail().equals(email))
 			{
