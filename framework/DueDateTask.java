@@ -1,8 +1,6 @@
 package framework;
-//package Tasks;
 
 import java.util.Date;
-//import people.User;
 import java.io.Serializable;
 
 public class DueDateTask extends Task implements Serializable

@@ -1,4 +1,5 @@
 package framework;
+
 import java.util.ArrayList;
 import java.io.Serializable;
 
@@ -69,9 +70,16 @@ public class User implements Serializable
 		return groups.remove(group);
 	}
 	
-	public void setPassword(String password)
+	public ArrayList<Group> getGroups()
+	{
+		return this.groups;
+	}
+	
+	public boolean setPassword(String password)
 	{
 		this.password = password;
+		
+		return this.password.equals(password);
 	}
 	
 	public String getName()
@@ -79,7 +87,7 @@ public class User implements Serializable
 		return this.name;
 	}
 	
-	public ArrayList<Task> getTaskList()
+	public ArrayList<Task> getTasks()
 	{
 		return this.tasks;
 	}
@@ -89,9 +97,11 @@ public class User implements Serializable
 		return this.email;
 	}
 	
-	public void setEmail(String email)
+	public boolean setEmail(String email)
 	{
 		this.email = email;
+		
+		return this.email.equals(email);
 	}
 	
 	public String getUsername()
