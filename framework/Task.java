@@ -6,25 +6,25 @@ import java.io.Serializable;
 public class Task implements Serializable
 {
 	private String name;
-	private User creater;
+	private User creator;
 	private ArrayList<User> users;
 	private User currentuser;
 	
 	public Task()
 	{
 		name = "";
-		creater = null;
+		creator = null;
 		users = new ArrayList<User>();
 		currentuser = null;
 	}
 	
-	public Task(String name, User creater)
+	public Task(String name, User creator)
 	{
 		this.name = name;
-		this.creater = creater;
+		this.creator = creator;
 		users = new ArrayList<User>();
 		currentuser = null;
-		users.add(creater);
+		users.add(creator);
 	}
 	
 	public void setName(String name)
@@ -37,15 +37,15 @@ public class Task implements Serializable
 		return this.name;
 	}
 	
-	public void setCreater(User creater)
+	public void setCreator(User creator)
 	{
-		this.creater = creater;
-		addUser(creater);
+		this.creator = creator;
+		addUser(creator);
 	}
 	
-	public User getCreater()
+	public User getCreator()
 	{
-		return this.creater;
+		return this.creator;
 	}
 	
 	public ArrayList<User> getUserList()
