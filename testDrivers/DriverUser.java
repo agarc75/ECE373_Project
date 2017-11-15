@@ -1,3 +1,12 @@
+/* READ BEFORE USE
+ * 
+ * The User driver tests every method of the User class. The methods are tested using a
+ * combination of boolean, String, and ArrayList methods. All expected outputs are printed
+ * out next to the actual method output.
+ * 
+ * To use the driver, simply run it a a java application.
+ */
+
 package testDrivers;
 
 import framework.User;
