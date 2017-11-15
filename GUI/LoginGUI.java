@@ -49,7 +49,7 @@ public class LoginGUI extends JFrame
 	{	
 		//Changes Java Icon to Turns logo
 		try {
-		    setIconImage(ImageIO.read(new File("ECE373_Project/GUIItems/appLogo.PNG")));
+		    setIconImage(ImageIO.read(new File("./GUIItems/appLogo.PNG")));
 		}
 		catch (IOException exc) {
 		    exc.printStackTrace();
