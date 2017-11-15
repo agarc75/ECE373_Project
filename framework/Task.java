@@ -40,6 +40,7 @@ public class Task implements Serializable
 	public void setCreater(User creater)
 	{
 		this.creater = creater;
+		addUser(creater);
 	}
 	
 	public User getCreater()
@@ -86,6 +87,18 @@ public class Task implements Serializable
 		else
 		{
 			return false;
+		}
+	}
+	
+	public void nextUser()
+	{
+		if (this.users.indexOf(this.currentuser) == this.users.size() - 1)
+		{
+			this.currentuser = this.users.get(0);
+		}
+		else
+		{
+			this.currentuser = this.users.get(this.users.indexOf(currentuser) + 1);
 		}
 	}
 	
