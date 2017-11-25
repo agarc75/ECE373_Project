@@ -192,6 +192,7 @@ public class LoginGUI extends JFrame
 					if(tempUser.validatePassword(String.valueOf(passwordField.getPassword())))
 					{
 						correctUser = true;
+						turn.setCurrentUSer(tempUser);
 						setVisible(false);
 						dispose();
 					}	
