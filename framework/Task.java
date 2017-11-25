@@ -22,6 +22,7 @@ public class Task implements Serializable
 	{
 		this.name = name;
 		this.creator = creator;
+		creator.addTask(this);
 		users = new ArrayList<User>();
 		currentuser = null;
 		users.add(creator);
