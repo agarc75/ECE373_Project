@@ -18,7 +18,7 @@ public class Turns implements Serializable
 	//constructor for Turns//
 	public Turns()
 	{
-		this.users = null;
+		this.users = new HashMap<>();
 		this.currentUser = null;
 	}
 	
@@ -28,10 +28,17 @@ public class Turns implements Serializable
 		this.users.put(userName, user);
 	}
 	
-	public void removeUSer(String userName, User user)
+	public void removeUser(String userName, User user)
 	{
 		this.users.remove(userName,user);
 		
+	}
+	
+	public User loginUser(String userName) {
+		if(users.containsKey(userName)) {
+			return users.get(userName);
+		}
+		else return null;
 	}
 	
 	public void setCurrentUSer(User user)
