@@ -47,10 +47,7 @@ public class LoginGUI extends JFrame
 	private JLabel forgotPasswordLabel = new JLabel("Forgot Password?");
 	private JLabel newUserLabel = new JLabel("New User");
 	
-	//Flag used to confirm the user
-	private static boolean correctUser = false;
-	
-	
+		
 	public LoginGUI (Turns turn) 
 	{
 		super("Welcome to Turns");
@@ -191,15 +188,17 @@ public class LoginGUI extends JFrame
 				{
 					if(tempUser.validatePassword(String.valueOf(passwordField.getPassword())))
 					{
-						correctUser = true;
 						turn.setCurrentUSer(tempUser);
 						setVisible(false);
 						dispose();
+						
+						//Goes into main Screen
+						new MainScreenGUI(turn);
 					}	
 					else
 					{
 						JOptionPane.showMessageDialog(null, "The password entered does not match our records!", "Incorrect Password", 0);
-						System.out.println(passwordField.getPassword());
+						//System.out.println(passwordField.getPassword());
 					}
 				}
 				else
@@ -251,8 +250,4 @@ public class LoginGUI extends JFrame
 		
 	}
 	
-	public static boolean getCorrectUser()
-	{
-		return correctUser;
-	}
 }
