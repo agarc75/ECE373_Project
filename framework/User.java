@@ -30,6 +30,12 @@ public class User implements Serializable
 		this.groups = new ArrayList<Group>();
 	}
 	
+	public boolean validatePassword(String password)
+	{
+		return this.password.equals(password);
+	}
+	
+	
 	public boolean addFriend(User user)
 	{
 		return friends.add(user);
@@ -54,12 +60,7 @@ public class User implements Serializable
 	{
 		return tasks.remove(task);
 	}
-	
-	public boolean validate(String password)
-	{
-		return this.password.equals(password);
-	}
-	
+
 	public boolean addGroup(Group group)
 	{
 		return groups.add(group);
