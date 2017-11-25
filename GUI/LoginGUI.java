@@ -1,19 +1,27 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageFilter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import com.sun.prism.Graphics;
 
 import framework.Turns;
 import javafx.event.ActionEvent;
@@ -37,8 +45,12 @@ public class LoginGUI extends JFrame
 		super("Welcome to Turns");
 		this.turn = turn;
 		
-		setSize(300, 200);
+		setSize(300, 300);
 		setLocationRelativeTo(null);
+		
+		forgotPasswordLabel.setForeground(Color.LIGHT_GRAY);
+		newUserLabel.setForeground(Color.LIGHT_GRAY);
+		
 		
 		buildGUI();
 		
@@ -58,68 +70,98 @@ public class LoginGUI extends JFrame
 		
 		JPanel turnsLogin = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
+		GridBagConstraints d = new GridBagConstraints();
+		
+		turnsLogin.setBackground(Color.black);
+		turnsLogin.setForeground(Color.WHITE);
+		
 		
 		
 		
 		//Text Fields
 		JLabel userNameLabel = new JLabel("Username: ");
+		userNameLabel.setForeground(Color.LIGHT_GRAY);
 		JTextField userNameField = new JTextField(10);
+		userNameField.setBackground(Color.LIGHT_GRAY);
 		JLabel passwordLabel = new JLabel("Password: ");
-		JTextField passwordField = new JTextField(10);
+		passwordLabel.setForeground(Color.LIGHT_GRAY);
+		JPasswordField passwordField = new JPasswordField(10);
+		passwordField.setBackground(Color.LIGHT_GRAY);
+		
 		
 		//Buttons
 		JButton loginButton = new JButton("login");
+		loginButton.setForeground(Color.WHITE);
+		Color loginButtonColor = new Color(102, 178, 255);
+		loginButton.setBackground(loginButtonColor);
 		
 		//Action Listeners
 		newUserLabel.addMouseListener(new linkListener());
 		forgotPasswordLabel.addMouseListener(new linkListener());
 		
+		BufferedImage myPicture = null;
 		
-		c.ipady = 5;
-		c.fill = GridBagConstraints.HORIZONTAL;
-		c.weighty = 0.3;
+		try {
+			myPicture = ImageIO.read(new File("./GUIItems/appLogo.PNG"));
+		}
+		 catch (IOException exc) {
+		    exc.printStackTrace();
+		}
 		
-		turnsLogin.add(new JPanel(), c);
+		JLabel picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(50, 50, Image.SCALE_FAST)));
 		
-		c.weighty = 1;
+		
+		d.gridwidth = 3;
+		d.gridx = 0;
+		d.weighty = 40;
+		turnsLogin.add(picLabel, d);
+		
+		
+		
+		
+		c.gridwidth = 1;
+		c.ipady = 2;
+		c.weighty = 2;
 		c.weightx = 2;
 		c.gridx = 0;
-	    c.gridy = 1;
+	    c.gridy = 2;
 		turnsLogin.add(userNameLabel, c);
 		
 		c.weightx = 2;
 		c.gridx = 1;
-	    c.gridy = 1;
+	    c.gridy = 2;
 		turnsLogin.add(userNameField, c);
 		
 		c.weightx = 0.5;
+		c.weighty = 2;
 		c.gridx = 0;
-	    c.gridy = 2;
+	    c.gridy = 3;
 		turnsLogin.add(passwordLabel, c);
 		
-		c.weightx = 0.5;
+		c.weighty = 5;
+		c.weightx = 2;
 		c.gridx = 1;
-	    c.gridy = 2;
+	    c.gridy = 3;
 		turnsLogin.add(passwordField, c);
 	
 		c.fill = GridBagConstraints.LINE_END;
+		c.weighty = 10;
 		c.weightx = 3;
 		c.ipady = 3;
 		c.ipadx = 15;
 		c.gridx = 1;
-	    c.gridy = 3;
+	    c.gridy = 5;
 		turnsLogin.add(loginButton, c);
 		
-		c.weighty = 10;
-		
+		c.weighty = 70;
 		c.weightx = 0.5;
 		c.gridx = 0;
-	    c.gridy = 6;
+	    c.gridy = 7;
 		turnsLogin.add(forgotPasswordLabel, c);
 		
 		c.weightx = 0.5;
 		c.gridx = 1;
-	    c.gridy = 6;
+	    c.gridy = 7;
 		turnsLogin.add(newUserLabel, c);
 		
 		
@@ -134,12 +176,14 @@ public class LoginGUI extends JFrame
 			if(source.equals(forgotPasswordLabel))
 				System.out.println("Forgot Password?");
 			if(source.equals(newUserLabel))
-				NewUserGUI();
+				new NewUserGUI(turn);
+			
 		}
-		
+
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			//TODO
+			// TODO Auto-generated method stub
+			
 		}
 
 		@Override
@@ -159,86 +203,6 @@ public class LoginGUI extends JFrame
 			// TODO Auto-generated method stub
 			
 		}
-	}
-	
-	private void NewUserGUI() 
-	{
-		JLabel welcomeMessage = new JLabel("Create an Account");
-		JLabel nameLabel = new JLabel("Name: ");
-		JTextField nameField = new JTextField(10);
-		JLabel userNameLabel = new JLabel("Username: ");
-		JTextField userNameField = new JTextField(10);
-		JLabel emailLabel = new JLabel("Email: ");
-		JTextField emailField = new JTextField(10);
-		JLabel passwordLabel = new JLabel("Password");
-		JPasswordField passwordField = new JPasswordField(10);
-		JLabel confirmLabel = new JLabel("Confirm Password: ");
-		JPasswordField confirmField = new JPasswordField(10);
-		
-		JPanel panel = new JPanel(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		
-		c.fill = GridBagConstraints.HORIZONTAL;
-		
-		c.weightx = 2;
-		c.gridx = 0;
-	    c.gridy = 0;
-		panel.add(welcomeMessage, c);
-		
-		c.weightx = 2;
-		c.gridx = 0;
-	    c.gridy = 1;
-		panel.add(nameLabel, c);
-		c.weightx = 2;
-		c.gridx = 1;
-	    c.gridy = 1;
-		panel.add(nameField, c);
-		
-		c.weightx = 2;
-		c.gridx = 0;
-	    c.gridy = 2;
-		panel.add(userNameLabel, c);
-		c.weightx = 2;
-		c.gridx = 1;
-	    c.gridy = 2;
-		panel.add(userNameField, c);
-		
-		c.weightx = 2;
-		c.gridx = 0;
-	    c.gridy = 3;
-		panel.add(emailLabel, c);
-		c.weightx = 2;
-		c.gridx = 1;
-	    c.gridy = 3;
-		panel.add(emailField, c);
-		
-		c.weightx = 2;
-		c.gridx = 0;
-	    c.gridy = 4;
-		panel.add(passwordLabel, c);
-		c.weightx = 2;
-		c.gridx = 1;
-	    c.gridy = 4;
-		panel.add(passwordField, c);
-		
-		c.weightx = 2;
-		c.gridx = 0;
-	    c.gridy = 5;
-		panel.add(confirmLabel, c);
-		c.weightx = 2;
-		c.gridx = 1;
-	    c.gridy = 5;
-		panel.add(confirmField, c);
-		
-		JOptionPane.showMessageDialog(null, panel, "Welcome to Turns!", -1);
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 }
