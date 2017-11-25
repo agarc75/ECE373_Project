@@ -83,6 +83,11 @@ public class User implements Serializable
 		return this.password.equals(password);
 	}
 	
+	public String getPassword()
+	{
+		return this.password;
+	}
+	
 	public String getName()
 	{
 		return this.name;
