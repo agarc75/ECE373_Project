@@ -42,7 +42,7 @@ public class TaskListGUI extends JPanel
 		
 		
 		setBackground(Color.BLACK);
-		setLayout(new GridLayout(tempTaskList.size()+5, 0));
+		setLayout(new GridLayout(10, 0));
 		
 		for (int i = 0; i < tempTaskList.size(); i++)
 		{
