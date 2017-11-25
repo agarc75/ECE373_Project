@@ -11,7 +11,7 @@ public class TurnsGUI
 	{	
 		//Test user
 		Turns turn = new Turns();
-		User ravila = new User("Rigo Avila", "ravila", "ravila@email.com", "1234");
+		User ravila = new User("Rigo Avila", "ravila", "1", "1234");
 		turn.addUser("ravila", ravila);
 		
 		new LoginGUI(turn);
