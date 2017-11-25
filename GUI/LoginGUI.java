@@ -9,6 +9,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -24,6 +25,7 @@ import javax.swing.*;
 import com.sun.prism.Graphics;
 
 import framework.Turns;
+import framework.User;
 import javafx.event.ActionEvent;
 
 public class LoginGUI extends JFrame
@@ -33,11 +35,20 @@ public class LoginGUI extends JFrame
 	 */
 	private static final long serialVersionUID = 1L;
 	private Turns turn;
+	private User tempUser = null;
 	
 	//** GUI Components
+	//Text Fields
+	private JTextField userNameField = new JTextField(10);
+	private JPasswordField passwordField = new JPasswordField(10);
+	
 	//Ending Labels
+	private JButton loginButton = new JButton("login");
 	private JLabel forgotPasswordLabel = new JLabel("Forgot Password?");
 	private JLabel newUserLabel = new JLabel("New User");
+	
+	//Flag used to confirm the user
+	private static boolean correctUser = false;
 	
 	
 	public LoginGUI (Turns turn) 
@@ -81,21 +92,21 @@ public class LoginGUI extends JFrame
 		//Text Fields
 		JLabel userNameLabel = new JLabel("Username: ");
 		userNameLabel.setForeground(Color.LIGHT_GRAY);
-		JTextField userNameField = new JTextField(10);
+		
 		userNameField.setBackground(Color.LIGHT_GRAY);
 		JLabel passwordLabel = new JLabel("Password: ");
 		passwordLabel.setForeground(Color.LIGHT_GRAY);
-		JPasswordField passwordField = new JPasswordField(10);
+		
 		passwordField.setBackground(Color.LIGHT_GRAY);
 		
 		
 		//Buttons
-		JButton loginButton = new JButton("login");
 		loginButton.setForeground(Color.WHITE);
 		Color loginButtonColor = new Color(102, 178, 255);
 		loginButton.setBackground(loginButtonColor);
 		
 		//Action Listeners
+		loginButton.addActionListener(new buttonlistener());
 		newUserLabel.addMouseListener(new linkListener());
 		forgotPasswordLabel.addMouseListener(new linkListener());
 		
@@ -168,16 +179,49 @@ public class LoginGUI extends JFrame
 		add(turnsLogin);
 	}
 	
-	private class linkListener implements MouseListener{
+	private class buttonlistener implements ActionListener
+	{
+		@Override
+		public void actionPerformed(java.awt.event.ActionEvent e) {
+			JButton source = (JButton)(e.getSource());
+			if(source.equals(loginButton)) 
+			{
+				tempUser = turn.loginUser(userNameField.getText());
+				if(tempUser != null) 
+				{
+					if(tempUser.validatePassword(String.valueOf(passwordField.getPassword())))
+					{
+						correctUser = true;
+						setVisible(false);
+						dispose();
+					}	
+					else
+					{
+						JOptionPane.showMessageDialog(null, "The password entered does not match our records!", "Incorrect Password", 0);
+						System.out.println(passwordField.getPassword());
+					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "The Username entered does not exist.\nPlease feel free to create an account", "User Not Found", 1);
+				}
+			}
+			
+		}
+		
+	}
+	
+	private class linkListener implements MouseListener
+	{
 
 		@Override
-		public void mouseClicked(MouseEvent e) {
+		public void mouseClicked(MouseEvent e) 
+		{
 			JLabel source = (JLabel)(e.getSource());
 			if(source.equals(forgotPasswordLabel))
-				System.out.println("Forgot Password?");
+				new ForgotPasswordGUI(turn);
 			if(source.equals(newUserLabel))
 				new NewUserGUI(turn);
-			
 		}
 
 		@Override
@@ -204,5 +248,10 @@ public class LoginGUI extends JFrame
 			
 		}
 		
+	}
+	
+	public static boolean getCorrectUser()
+	{
+		return correctUser;
 	}
 }
