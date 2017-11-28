@@ -38,6 +38,7 @@ public class MainScreenGUI extends JFrame
 		
 		
 		add(new TaskListGUI(turn), BorderLayout.LINE_START);
+		add(new CurrentTaskGUI(turn), BorderLayout.LINE_END);
 		
 		
 		
