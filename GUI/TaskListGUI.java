@@ -12,10 +12,14 @@ import java.awt.Insets;
 import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.font.TextAttribute;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
@@ -32,6 +36,9 @@ public class TaskListGUI extends JPanel
 	Color ButtonColor = new Color(102, 178, 255);
 	Font font = new Font("Arial", Font.PLAIN, 15);
 	
+	Font taskLabelFont = new Font("Serif", Font.BOLD, 20);
+	JLabel tasksLabel = new JLabel("Tasks");
+	
 	public TaskListGUI(Turns turn) {
 		tempTaskList = turn.getCurrentUser().getTasks();
 		
@@ -39,10 +46,16 @@ public class TaskListGUI extends JPanel
 		
 		Dimension buttonSize = new Dimension(300, 20);
 		
+		tasksLabel.setForeground(Color.LIGHT_GRAY);
+		tasksLabel.setFont(taskLabelFont);
+		tasksLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		
 		setBackground(Color.BLACK);
 		setLayout(new GridLayout(10, 0));
+		
+		//Adds label to top
+		add(tasksLabel);
 		
 		for (int i = 0; i < tempTaskList.size(); i++)
 		{
