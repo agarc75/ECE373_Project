@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -44,7 +45,7 @@ public class TaskListGUI extends JPanel
 		
 		ArrayList<JButton> btn = new ArrayList<JButton>();
 		
-		Dimension buttonSize = new Dimension(300, 20);
+		Dimension buttonSize = new Dimension(300, 50);
 		
 		tasksLabel.setForeground(Color.LIGHT_GRAY);
 		tasksLabel.setFont(taskLabelFont);
@@ -52,7 +53,6 @@ public class TaskListGUI extends JPanel
 		
 		
 		setBackground(Color.BLACK);
-		setLayout(new GridLayout(10, 0));
 		
 		//Adds label to top
 		add(tasksLabel);
@@ -62,15 +62,14 @@ public class TaskListGUI extends JPanel
 		    btn.add(new JButton(tempTaskList.get(i).getName()));
 		    btn.get(i).addActionListener(new buttonListener());
 		    btn.get(i).setPreferredSize(buttonSize);
-		    btn.get(i).setMinimumSize(buttonSize);
+		    btn.get(i).setMaximumSize(buttonSize);
 		    btn.get(i).setFont(font);
 		    btn.get(i).setForeground(Color.WHITE);
 			btn.get(i).setBackground(ButtonColor);
 		    add(btn.get(i));
 		    
 		}
-		
-		
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setVisible(true);
 	}
 	

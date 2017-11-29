@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.io.File;
@@ -11,6 +12,7 @@ import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import framework.Turns;
 
@@ -34,14 +36,15 @@ public class MainScreenGUI extends JFrame
 		catch (IOException exc) {
 		    exc.printStackTrace();
 		}
+		JScrollPane scrollPane = new JScrollPane(new TaskListGUI(turn));
+		scrollPane.setPreferredSize(new Dimension(318, 500));
+		add(scrollPane, BorderLayout.LINE_START);
 		
-		
-		
-		add(new TaskListGUI(turn), BorderLayout.LINE_START);
 		add(new CurrentTaskGUI(turn, turn.getCurrentUser().getTasks().get(1)), BorderLayout.CENTER);
+
+
 		
-		
-		
+
 	
 		//pack();
 		setVisible(true);
