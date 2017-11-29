@@ -3,6 +3,7 @@ package GUI;
 import framework.Task;
 import framework.Turns;
 import framework.User;
+import sun.security.x509.IssuerAlternativeNameExtension;
 
 public class TurnsGUI
 {
@@ -12,9 +13,11 @@ public class TurnsGUI
 	{	
 		//Test user
 		Turns turn = new Turns();
-		User user1 = new User("Rigo Avila", "ravila", "1", "1234");
+		User user1 = new User("Rigo Avila", "ravilaaaa1aaa1a", "1", "1234");
 		User user2 = new User("Aza", "elguapo", "aza@gmail.com", "2468");
 		User user3 = new User("Aaron", "themyth", "aaron@aol.com", "1357");
+		User user4 = new User();
+		User user5 = new User();
 		
 		//test task
 		Task task1 = new Task("Trash", user1);
@@ -24,10 +27,15 @@ public class TurnsGUI
 		
 		task1.addUser(user2);
 		task1.addUser(user3);
+		
 		task2.addUser(user2);
 		task2.addUser(user3);
+		task2.addUser(user4);
+		task2.addUser(user5);
+		
 		task3.addUser(user2);
 		task3.addUser(user3);
+		
 		task4.addUser(user2);
 		task4.addUser(user3);
 		
