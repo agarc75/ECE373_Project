@@ -59,7 +59,7 @@ public class DriverUser
 		System.out.println("Output: " + Boolean.toString(user.setPassword("1234")) +  "\n");
 		
 		System.out.println("validate(String password): Expected output -- true");
-		System.out.println("Output: " + Boolean.toString(user.validate("1234")) + "\n");
+		System.out.println("Output: " + Boolean.toString(user.validatePassword("1234")) + "\n");
 		
 		System.out.println("getName(): Expected output -- Aaron Garcia");
 		System.out.println("Output: " + user.getName() + "\n");

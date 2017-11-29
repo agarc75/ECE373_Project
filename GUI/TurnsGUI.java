@@ -21,6 +21,16 @@ public class TurnsGUI
 		Task task2 = new Task("Stuff1", user1);
 		Task task3 = new Task("Stuff2", user1);
 		Task task4 = new Task("Stuff3", user1);
+		Task task5 = new Task("Stuff3", user1);
+		Task task6 = new Task("Stuff3", user1);
+		Task task7 = new Task("Stuff3", user1);
+		Task task8 = new Task("Stuff3", user1);
+		Task task9 = new Task("Stuff3", user1);
+		Task task10 = new Task("Stuff3", user1);
+		Task task11 = new Task("Stuff4", user1);
+		Task task12 = new Task("Stuff5", user1);
+		
+		
 		
 		task1.addUser(user2);
 		task1.addUser(user3);
@@ -30,6 +40,22 @@ public class TurnsGUI
 		task3.addUser(user3);
 		task4.addUser(user2);
 		task4.addUser(user3);
+		task5.addUser(user2);
+		task5.addUser(user3);
+		task6.addUser(user2);
+		task6.addUser(user3);
+		task7.addUser(user2);
+		task7.addUser(user3);
+		task8.addUser(user2);
+		task8.addUser(user3);
+		task9.addUser(user2);
+		task9.addUser(user3);
+		task10.addUser(user2);
+		task10.addUser(user3);
+		task11.addUser(user2);
+		task11.addUser(user3);
+		task12.addUser(user2);
+		task12.addUser(user3);
 		
 		
 		turn.addUser("ravila", user1);
