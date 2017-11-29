@@ -40,6 +40,10 @@ public class MainScreenGUI extends JFrame
 		scrollPane.setPreferredSize(new Dimension(318, 500));
 		
 		add(scrollPane, BorderLayout.LINE_START);
+
+		add(new CurrentTaskGUI(turn), BorderLayout.LINE_END);
+		
+
 	
 		//pack();
 		setVisible(true);
