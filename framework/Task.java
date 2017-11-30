@@ -111,4 +111,23 @@ public class Task implements Serializable
 		}
 	}
 	
+	public String getUserOrderString()
+	{
+		String temp = "";
+		temp += this.currentuser.getName();
+		
+		int currentUserIndex = this.users.indexOf(this.currentuser);
+		
+		for (int i = currentUserIndex + 1; i != this.users.size(); ++i)
+		{
+			if (i >= this.users.size())
+			{
+				i = 0;
+			}
+			
+			temp += ", " + this.users.get(i);
+		}
+			
+		return temp;
+	}	
 }
