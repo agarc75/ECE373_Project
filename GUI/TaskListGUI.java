@@ -20,6 +20,7 @@ import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -36,14 +37,20 @@ public class TaskListGUI extends JPanel
 	
 	Color ButtonColor = new Color(102, 178, 255);
 	Font font = new Font("Arial", Font.PLAIN, 15);
+	ArrayList<JButton> btn = new ArrayList<JButton>();
 	
 	Font taskLabelFont = new Font("Serif", Font.BOLD, 20);
 	JLabel tasksLabel = new JLabel("Tasks");
 	
-	public TaskListGUI(Turns turn) {
+	MainScreenGUI tempFrame;
+	
+	
+	
+	public TaskListGUI(Turns turn, MainScreenGUI frame) {
+		this.turn = turn;
 		tempTaskList = turn.getCurrentUser().getTasks();
+		tempFrame = frame;
 		
-		ArrayList<JButton> btn = new ArrayList<JButton>();
 		
 		Dimension buttonSize = new Dimension(300, 50);
 		
@@ -77,9 +84,14 @@ public class TaskListGUI extends JPanel
 	{
 
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
+		public void actionPerformed(ActionEvent e) {
+			JButton source = (JButton)(e.getSource());
+			int index = btn.indexOf(e.getSource());
+			if(source.equals(btn.get(index)))
+			{
+				turn.setCurrentTask(tempTaskList.get(index));
+				tempFrame.addCurrentTaskGUI();
+			}
 		}
 		
 	}
