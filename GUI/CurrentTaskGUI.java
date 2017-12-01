@@ -43,73 +43,72 @@ public class CurrentTaskGUI extends JPanel {
 		   
 		   System.out.println(currentTask.getCurrentUser().getUsername().length());
 		   
-		   switch (usersAmount) {
-		   	case 2:
-		   		g.setColor(darkRed);
-		   		g.fillOval(xpos, ypos, radius, radius);
-		   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos);
-		   		
-		   		g.setColor(Color.ORANGE);
-		   		g.fillOval(xpos, ypos + 200, radius, radius);
-			
-			break;
-		   	case 3:
-		   		g.setColor(darkRed);
-		   		g.fillOval(xpos, ypos, radius, radius);
-		   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos);
-			   
-		   		g.setColor(Color.GREEN);
-		   		g.fillOval(xpos + 100, ypos + 200, radius, radius);
-			   
-		   		g.setColor(Color.ORANGE);
-		   		g.fillOval(xpos - 100, ypos + 200, radius, radius);
+			   switch (usersAmount) {
+			   	case 2:
+			   		g.setColor(darkRed);
+			   		g.fillOval(xpos, ypos, radius, radius);
+			   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos);
+			   		
+			   		g.setColor(Color.ORANGE);
+			   		g.fillOval(xpos, ypos + 200, radius, radius);
 				
-			break;
-		   	case 4:
-		   		g.setColor(darkRed);
-		   		g.fillOval(xpos, ypos, radius, radius);
-		   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos);
-			   
-		   		g.setColor(Color.GREEN);
-		   		g.fillOval(xpos + 100, ypos + 150, radius, radius);
-		   		
-		   		g.setColor(Color.GREEN);
-		   		g.fillOval(xpos, ypos + 300, radius, radius);
-			   
-		   		g.setColor(Color.ORANGE);
-		   		g.fillOval(xpos - 100, ypos + 150, radius, radius);
-			break;
-		   	case 5:
-		   		radius = radius - 25;
-		   		g.setColor(darkRed);
-		   		g.fillOval(xpos, ypos, radius, radius);
-		   		g.setColor(Color.WHITE);
-		   		g.setFont(userNameFont);
-		   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos + radius / 2);
-			   
-		   		g.setColor(Color.GREEN);
-		   		g.fillOval(xpos + 150, ypos + 100, radius, radius);
-		   		
-		   		g.setColor(Color.GREEN);
-		   		g.fillOval(xpos + 100, ypos + 250, radius, radius);
-		   		
-		   		g.setColor(Color.GREEN);
-		   		g.fillOval(xpos - 100, ypos + 250, radius, radius);
-			   
-		   		g.setColor(Color.ORANGE);
-		   		g.fillOval(xpos - 150, ypos + 100, radius, radius);
-		   	
-		   	break;
-
-		   	default:
-		   		g.setColor(darkRed);
-		   		g.fillOval(xpos, ypos, radius, radius);
-			break;
-		}
-		  
-		   
-		   
+				break;
+			   	case 3:
+			   		g.setColor(darkRed);
+			   		g.fillOval(xpos, ypos, radius, radius);
+			   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos);
+				   
+			   		g.setColor(Color.GREEN);
+			   		g.fillOval(xpos + 100, ypos + 200, radius, radius);
+				   
+			   		g.setColor(Color.ORANGE);
+			   		g.fillOval(xpos - 100, ypos + 200, radius, radius);
+					
+				break;
+			   	case 4:
+			   		g.setColor(darkRed);
+			   		g.fillOval(xpos, ypos, radius, radius);
+			   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos);
+				   
+			   		g.setColor(Color.GREEN);
+			   		g.fillOval(xpos + 100, ypos + 150, radius, radius);
+			   		
+			   		g.setColor(Color.GREEN);
+			   		g.fillOval(xpos, ypos + 300, radius, radius);
+				   
+			   		g.setColor(Color.ORANGE);
+			   		g.fillOval(xpos - 100, ypos + 150, radius, radius);
+				break;
+			   	case 5:
+			   		radius = radius - 25;
+			   		g.setColor(darkRed);
+			   		g.fillOval(xpos, ypos, radius, radius);
+			   		g.setColor(Color.WHITE);
+			   		g.setFont(userNameFont);
+			   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos + radius / 2);
+				   
+			   		g.setColor(Color.GREEN);
+			   		g.fillOval(xpos + 150, ypos + 100, radius, radius);
+			   		
+			   		g.setColor(Color.GREEN);
+			   		g.fillOval(xpos + 100, ypos + 250, radius, radius);
+			   		
+			   		g.setColor(Color.GREEN);
+			   		g.fillOval(xpos - 100, ypos + 250, radius, radius);
+				   
+			   		g.setColor(Color.ORANGE);
+			   		g.fillOval(xpos - 150, ypos + 100, radius, radius);
+			   	
+			   	break;
+	
+			   	default:
+			   		g.setColor(darkRed);
+			   		g.fillOval(xpos, ypos, radius, radius);
+				break;
+			}
 	   }
+	    
+	   
 	   
 	   
 	   
