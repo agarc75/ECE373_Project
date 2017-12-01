@@ -20,6 +20,7 @@ public class MainScreenGUI extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	private Turns turn;
+	private CurrentTaskGUI currentGUI;
 	
 	public MainScreenGUI(Turns turn) {
 		super("Welcome to Turns");
@@ -29,6 +30,8 @@ public class MainScreenGUI extends JFrame
 		setLocationRelativeTo(null);
 		setBackground(Color.DARK_GRAY);
 		
+		currentGUI = new CurrentTaskGUI(turn, turn.getCurrentTask());
+		
 		//Changes Java Icon to Turns logo
 		try {
 		    setIconImage(ImageIO.read(new File("./GUIItems/appLogo.PNG")));
@@ -36,22 +39,25 @@ public class MainScreenGUI extends JFrame
 		catch (IOException exc) {
 		    exc.printStackTrace();
 		}
-		JScrollPane scrollPane = new JScrollPane(new TaskListGUI(turn));
+		JScrollPane scrollPane = new JScrollPane(new TaskListGUI(turn, this));
 		scrollPane.setPreferredSize(new Dimension(318, 500));
 		add(scrollPane, BorderLayout.LINE_START);
 		
-		add(new CurrentTaskGUI(turn, turn.getCurrentUser().getTasks().get(1)), BorderLayout.CENTER);
-
+		add(currentGUI, BorderLayout.CENTER);
 
 		
-
-	
 		//pack();
 		setVisible(true);
-		
-		
 	
+	}
 	
+	public void addCurrentTaskGUI()
+	{	
+		currentGUI.setVisible(false);
+		remove(currentGUI);
+		add(currentGUI = new CurrentTaskGUI(turn, turn.getCurrentTask()), BorderLayout.CENTER);
+		repaint();
+		revalidate();
 	}
 	
 }

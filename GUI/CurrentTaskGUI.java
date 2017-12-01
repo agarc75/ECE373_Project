@@ -6,9 +6,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Shape;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import framework.Task;
@@ -26,10 +31,12 @@ public class CurrentTaskGUI extends JPanel {
 	   
 	   	public CurrentTaskGUI(Turns turn, Task selTask) 
 	   	{
-	   		this.turn = turn;
-	   		this.currentTask = selTask;
-	   		this.usersAmount = selTask.getUserList().size();
-		   setBackground(Color.GRAY);
+	   		if(selTask != null) {
+		   		this.turn = turn;
+		   		this.currentTask = selTask;
+		   		this.usersAmount = selTask.getUserList().size();
+		   		setBackground(Color.GRAY);
+	   		}
 	    }
 	    public void paintComponent(Graphics g)
 	    {
@@ -41,8 +48,42 @@ public class CurrentTaskGUI extends JPanel {
 		   int xpos = ((int) panelSize.getWidth() / 2) - radius/2;
 		   int ypos = ((int) panelSize.getHeight() / 4) - radius/2;
 		   
-		   System.out.println(currentTask.getCurrentUser().getUsername().length());
+		   //System.out.println(currentTask.getCurrentUser().getUsername().length());
 		   
+		   if(turn == null)
+		   {
+			   BufferedImage myPicture = null;
+			   BufferedImage myBackground = null;
+				
+				try {
+					myPicture = ImageIO.read(new File("./GUIItems/arrow1.PNG"));
+					myBackground = ImageIO.read(new File("./GUIItems/currentTaskBackground.jpg"));
+				}
+				 catch (IOException exc) {
+				    exc.printStackTrace();
+				}
+				
+				int xpic = ((int) panelSize.getWidth() / 4) + 18;
+				int ypic = ((int) panelSize.getHeight() / 4);
+				
+				g.drawImage(myBackground, 0, 0, null);
+				g.drawImage(myPicture.getScaledInstance(200, 200, Image.SCALE_FAST), xpic, ypic, null);
+				
+			   
+		   }
+		   else {
+			   BufferedImage myCircleBackground = null;
+				
+				try {
+					myCircleBackground = ImageIO.read(new File("./GUIItems/circleBackground.png"));
+				}
+				 catch (IOException exc) {
+				    exc.printStackTrace();
+				}
+				
+				g.drawImage(myCircleBackground.getScaledInstance(((int) panelSize.getWidth()),((int) panelSize.getHeight()), Image.SCALE_FAST), 0, 0, null);
+				
+			   
 			   switch (usersAmount) {
 			   	case 2:
 			   		g.setColor(darkRed);
@@ -80,6 +121,7 @@ public class CurrentTaskGUI extends JPanel {
 			   		g.fillOval(xpos - 100, ypos + 150, radius, radius);
 				break;
 			   	case 5:
+			   		xpos+=18;
 			   		radius = radius - 25;
 			   		g.setColor(darkRed);
 			   		g.fillOval(xpos, ypos, radius, radius);
@@ -106,6 +148,7 @@ public class CurrentTaskGUI extends JPanel {
 			   		g.fillOval(xpos, ypos, radius, radius);
 				break;
 			}
+		   }
 	   }
 	    
 	   
