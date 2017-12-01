@@ -40,8 +40,8 @@ public class TurnsGUI
 		
 		task2.addUser(user2);
 		task2.addUser(user3);
-		task2.addUser(user4);
-		task2.addUser(user5);
+		//task2.addUser(user4);
+		//task2.addUser(user5);
 		
 		task3.addUser(user2);
 		task3.addUser(user3);
@@ -71,11 +71,11 @@ public class TurnsGUI
 		turn.addUser("themytho", user3);
 		
 		
-		//new LoginGUI(turn);
+		new LoginGUI(turn);
 		
 		//Bypasses login for testing
-		turn.setCurrentUSer(user1);
-		new MainScreenGUI(turn);
+		//turn.setCurrentUSer(user1);
+		//new MainScreenGUI(turn);
 		
 		
 		
