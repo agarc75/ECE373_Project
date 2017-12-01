@@ -7,6 +7,7 @@ public class User implements Serializable
 {
 	private String name;
 	private String username;
+	private String initials;
 	private String email;
 	private String password;
 	private String icon;
@@ -21,6 +22,7 @@ public class User implements Serializable
 	public User(String name, String username, String email, String password)
 	{
 		this.name = name;
+		createInitials(name);
 		this.username = username;
 		this.email = email;
 		this.password = password;
@@ -93,6 +95,11 @@ public class User implements Serializable
 		return this.name;
 	}
 	
+	public String getInitials()
+	{
+		return this.initials;
+	}
+	
 	public ArrayList<Task> getTasks()
 	{
 		return this.tasks;
@@ -113,5 +120,15 @@ public class User implements Serializable
 	public String getUsername()
 	{
 		return this.username;
+	}
+	
+	public void createInitials(String name)
+	{
+	
+		int end = name.lastIndexOf(' ');
+		 
+		 this.initials = name.substring(0, 1) + name.substring(end + 1, end + 2);
+		 this.initials.toUpperCase();
+		 
 	}
 }

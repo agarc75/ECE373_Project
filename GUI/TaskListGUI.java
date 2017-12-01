@@ -36,10 +36,10 @@ public class TaskListGUI extends JPanel
 	ArrayList<Task> tempTaskList = null;
 	
 	Color ButtonColor = new Color(102, 178, 255);
-	Font font = new Font("Arial", Font.PLAIN, 15);
+	Font font = new Font("Ariel", Font.PLAIN, 15);
 	ArrayList<JButton> btn = new ArrayList<JButton>();
 	
-	Font taskLabelFont = new Font("Serif", Font.BOLD, 20);
+	Font taskLabelFont = new Font("Ariel", Font.BOLD, 25);
 	JLabel tasksLabel = new JLabel("Tasks");
 	
 	MainScreenGUI tempFrame;
@@ -56,10 +56,9 @@ public class TaskListGUI extends JPanel
 		
 		tasksLabel.setForeground(Color.LIGHT_GRAY);
 		tasksLabel.setFont(taskLabelFont);
-		tasksLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		
-		setBackground(Color.BLACK);
+		setBackground(Color.DARK_GRAY);
 		
 		//Adds label to top
 		add(tasksLabel);

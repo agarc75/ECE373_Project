@@ -71,11 +71,11 @@ public class TurnsGUI
 		turn.addUser("themytho", user3);
 		
 		
-		new LoginGUI(turn);
+		//new LoginGUI(turn);
 		
 		//Bypasses login for testing
-		//turn.setCurrentUSer(user1);
-		//new MainScreenGUI(turn);
+		turn.setCurrentUSer(user1);
+		new MainScreenGUI(turn);
 		
 		
 		

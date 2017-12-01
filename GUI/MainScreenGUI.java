@@ -11,6 +11,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -22,6 +24,8 @@ public class MainScreenGUI extends JFrame
 	private Turns turn;
 	private CurrentTaskGUI currentGUI;
 	
+	private JMenuBar menuBar;
+	
 	public MainScreenGUI(Turns turn) {
 		super("Welcome to Turns");
 		this.turn = turn;
@@ -29,6 +33,17 @@ public class MainScreenGUI extends JFrame
 		setSize(800, 600);
 		setLocationRelativeTo(null);
 		setBackground(Color.DARK_GRAY);
+		
+		menuBar = new JMenuBar();
+		JMenu taskMenu = new JMenu("Tasks Options");
+		JMenu friendMenu = new JMenu("Friend Options");
+		
+		menuBar.add(taskMenu);
+		menuBar.add(friendMenu);
+		menuBar.setVisible(true);
+		
+		
+		setJMenuBar(menuBar);
 		
 		currentGUI = new CurrentTaskGUI(turn, turn.getCurrentTask());
 		

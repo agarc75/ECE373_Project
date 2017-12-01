@@ -26,7 +26,7 @@ public class CurrentTaskGUI extends JPanel {
 		private Turns turn;
 		private Task currentTask;
 		private int usersAmount = 0;
-		Font userNameFont = new Font("Arial", Font.PLAIN, 20);
+		Font userNameFont = new Font("Arial", Font.PLAIN, 40);
 	   	private Dimension panelSize = new Dimension(500, 550);
 	   
 	   	public CurrentTaskGUI(Turns turn, Task selTask) 
@@ -66,7 +66,7 @@ public class CurrentTaskGUI extends JPanel {
 				int xpic = ((int) panelSize.getWidth() / 4) + 18;
 				int ypic = ((int) panelSize.getHeight() / 4);
 				
-				g.drawImage(myBackground, 0, 0, null);
+				g.drawImage(myBackground.getScaledInstance(((int) panelSize.getWidth()),((int) panelSize.getHeight()), Image.SCALE_FAST), 0, 0, null);
 				g.drawImage(myPicture.getScaledInstance(200, 200, Image.SCALE_FAST), xpic, ypic, null);
 				
 			   
@@ -88,7 +88,9 @@ public class CurrentTaskGUI extends JPanel {
 			   	case 2:
 			   		g.setColor(darkRed);
 			   		g.fillOval(xpos, ypos, radius, radius);
-			   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos);
+			   		g.setColor(Color.WHITE);
+			   		g.setFont(userNameFont);
+			   		g.drawString(currentTask.getCurrentUser().getInitials(), xpos + radius /4 + 10, ypos + radius / 2 + 15);
 			   		
 			   		g.setColor(Color.ORANGE);
 			   		g.fillOval(xpos, ypos + 200, radius, radius);
@@ -97,7 +99,9 @@ public class CurrentTaskGUI extends JPanel {
 			   	case 3:
 			   		g.setColor(darkRed);
 			   		g.fillOval(xpos, ypos, radius, radius);
-			   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos);
+			   		g.setColor(Color.WHITE);
+			   		g.setFont(userNameFont);
+			   		g.drawString(currentTask.getCurrentUser().getInitials(), xpos + radius /4 + 10, ypos + radius / 2 + 15);
 				   
 			   		g.setColor(Color.GREEN);
 			   		g.fillOval(xpos + 100, ypos + 200, radius, radius);
@@ -109,7 +113,9 @@ public class CurrentTaskGUI extends JPanel {
 			   	case 4:
 			   		g.setColor(darkRed);
 			   		g.fillOval(xpos, ypos, radius, radius);
-			   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos);
+			   		g.setColor(Color.WHITE);
+			   		g.setFont(userNameFont);
+			   		g.drawString(currentTask.getCurrentUser().getInitials(), xpos + radius /4 + 10, ypos + radius / 2 + 15);
 				   
 			   		g.setColor(Color.GREEN);
 			   		g.fillOval(xpos + 100, ypos + 150, radius, radius);
@@ -127,11 +133,11 @@ public class CurrentTaskGUI extends JPanel {
 			   		g.fillOval(xpos, ypos, radius, radius);
 			   		g.setColor(Color.WHITE);
 			   		g.setFont(userNameFont);
-			   		g.drawString(currentTask.getCurrentUser().getUsername(), xpos, ypos + radius / 2);
+			   		g.drawString(currentTask.getCurrentUser().getInitials(), xpos + radius /4 + 4, ypos + radius / 2 + 15);
 				   
 			   		g.setColor(Color.GREEN);
 			   		g.fillOval(xpos + 150, ypos + 100, radius, radius);
-			   		
+			   					   		
 			   		g.setColor(Color.GREEN);
 			   		g.fillOval(xpos + 100, ypos + 250, radius, radius);
 			   		

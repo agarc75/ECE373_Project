@@ -14,12 +14,14 @@ public class Turns implements Serializable
 	//fields for Turns//
 	private HashMap<String,User> users;
 	private User currentUser;
+	private Task currentTask;
 	
 	//constructor for Turns//
 	public Turns()
 	{
 		this.users = new HashMap<>();
 		this.currentUser = null;
+		this.currentTask = null;
 	}
 	
 	//methods for Turns//
@@ -49,6 +51,16 @@ public class Turns implements Serializable
 	public User getCurrentUser()
 	{
 		return this.currentUser;
+	}
+	
+	public void setCurrentTask(Task currentTask)
+	{
+		this.currentTask = currentTask;
+	}
+	
+	public Task getCurrentTask()
+	{
+		return this.currentTask;
 	}
 	
 	public User findUserEmail(String email)
