@@ -63,8 +63,8 @@ public class CurrentTaskGUI extends JPanel {
 				    exc.printStackTrace();
 				}
 				
-				int xpic = ((int) panelSize.getWidth() / 4) + 18;
-				int ypic = ((int) panelSize.getHeight() / 4);
+				int xpic = ((int) panelSize.getWidth() / 2) -100;
+				int ypic = ((int) panelSize.getHeight() / 2) - 100;
 				
 				g.drawImage(myBackground.getScaledInstance(((int) panelSize.getWidth()),((int) panelSize.getHeight()), Image.SCALE_FAST), 0, 0, null);
 				g.drawImage(myPicture.getScaledInstance(200, 200, Image.SCALE_FAST), xpic, ypic, null);

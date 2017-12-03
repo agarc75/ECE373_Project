@@ -23,6 +23,7 @@ public class MainScreenGUI extends JFrame
 	private static final long serialVersionUID = 1L;
 	private Turns turn;
 	private CurrentTaskGUI currentGUI;
+	private TaskDetailsGUI detailsGUI;
 	
 	private JMenuBar menuBar;
 	
@@ -30,23 +31,25 @@ public class MainScreenGUI extends JFrame
 		super("Welcome to Turns");
 		this.turn = turn;
 		
-		setSize(800, 600);
+		setSize(1200, 600);
 		setLocationRelativeTo(null);
 		setBackground(Color.DARK_GRAY);
 		
 		menuBar = new JMenuBar();
 		JMenu taskMenu = new JMenu("Tasks Options");
 		JMenu friendMenu = new JMenu("Friend Options");
+		JMenu accountMenu = new JMenu("Account Options");
 		
 		menuBar.add(taskMenu);
 		menuBar.add(friendMenu);
+		menuBar.add(accountMenu);
 		menuBar.setVisible(true);
 		
 		
 		setJMenuBar(menuBar);
 		
 		currentGUI = new CurrentTaskGUI(turn, turn.getCurrentTask());
-		
+		detailsGUI = new TaskDetailsGUI(turn, turn.getCurrentTask());
 		//Changes Java Icon to Turns logo
 		try {
 		    setIconImage(ImageIO.read(new File("./GUIItems/appLogo.PNG")));
@@ -59,6 +62,7 @@ public class MainScreenGUI extends JFrame
 		add(scrollPane, BorderLayout.LINE_START);
 		
 		add(currentGUI, BorderLayout.CENTER);
+		add(detailsGUI, BorderLayout.LINE_END);
 
 		
 		//pack();
@@ -70,6 +74,9 @@ public class MainScreenGUI extends JFrame
 	{	
 		currentGUI.setVisible(false);
 		remove(currentGUI);
+		detailsGUI.setVisible(false);
+		remove(detailsGUI);
+		add(detailsGUI = new TaskDetailsGUI(turn, turn.getCurrentTask()), BorderLayout.LINE_END);
 		add(currentGUI = new CurrentTaskGUI(turn, turn.getCurrentTask()), BorderLayout.CENTER);
 		repaint();
 		revalidate();

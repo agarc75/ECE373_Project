@@ -19,12 +19,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
+import javax.swing.border.LineBorder;
 
 import framework.Task;
 import framework.Turns;
@@ -37,7 +40,8 @@ public class TaskListGUI extends JPanel
 	
 	Color ButtonColor = new Color(102, 178, 255);
 	Font font = new Font("Ariel", Font.PLAIN, 15);
-	ArrayList<JButton> btn = new ArrayList<JButton>();
+	ArrayList<JToggleButton> btn = new ArrayList<JToggleButton>();
+	private ButtonGroup btnGroup = new ButtonGroup();
 	
 	Font taskLabelFont = new Font("Ariel", Font.BOLD, 25);
 	JLabel tasksLabel = new JLabel("Tasks");
@@ -65,13 +69,16 @@ public class TaskListGUI extends JPanel
 		
 		for (int i = 0; i < tempTaskList.size(); i++)
 		{
-		    btn.add(new JButton(tempTaskList.get(i).getName()));
+		    btn.add(new JToggleButton(tempTaskList.get(i).getName()));
 		    btn.get(i).addActionListener(new buttonListener());
 		    btn.get(i).setPreferredSize(buttonSize);
 		    btn.get(i).setMaximumSize(buttonSize);
 		    btn.get(i).setFont(font);
 		    btn.get(i).setForeground(Color.WHITE);
+		    btn.get(i).setBorder(new LineBorder(Color.BLACK));
+		    btn.get(i).setFocusPainted(true);
 			btn.get(i).setBackground(ButtonColor);
+			btnGroup.add(btn.get(i));
 		    add(btn.get(i));
 		    
 		}
@@ -84,7 +91,7 @@ public class TaskListGUI extends JPanel
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			JButton source = (JButton)(e.getSource());
+			JToggleButton source = (JToggleButton)(e.getSource());
 			int index = btn.indexOf(e.getSource());
 			if(source.equals(btn.get(index)))
 			{
