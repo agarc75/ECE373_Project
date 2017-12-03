@@ -1,6 +1,7 @@
 package framework;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.io.Serializable;
 
 public class Task implements Serializable
@@ -9,6 +10,7 @@ public class Task implements Serializable
 	private User creator;
 	private ArrayList<User> users;
 	private User currentuser;
+	private Date duedate;
 	
 	public Task()
 	{
@@ -16,15 +18,27 @@ public class Task implements Serializable
 		creator = null;
 		users = new ArrayList<User>();
 		currentuser = null;
+		this.duedate = null;
 	}
 	
 	public Task(String name, User creator)
 	{
 		this.name = name;
 		this.creator = creator;
+		users = new ArrayList<User>();
+		creator.addTask(this);
+		currentuser = creator;
+		users.add(creator);
+	}
+	
+	public Task(String name, User creator, Date duedate)
+	{
+		this.name = name;
+		this.creator = creator;
 		creator.addTask(this);
 		users = new ArrayList<User>();
 		currentuser = creator;
+		this.duedate = duedate;
 		users.add(creator);
 	}
 	
@@ -64,6 +78,16 @@ public class Task implements Serializable
 		return this.currentuser;
 	}
 	
+	public void setDueDate(Date adate)
+	{
+		this.duedate = adate;
+	}
+	
+	public Date getDate()
+	{
+		return this.duedate;
+	}
+	
 	//****Methods*******
 	public boolean addUser(User user)
 	{
@@ -74,6 +98,7 @@ public class Task implements Serializable
 		else
 		{
 			this.users.add(user);
+			user.addTask(this);
 			return true;
 		}
 	}

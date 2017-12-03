@@ -17,6 +17,9 @@ public class User implements Serializable
 	
 	public User()
 	{
+		this.friends = new ArrayList<User>();
+		this.tasks = new ArrayList<Task>();
+		this.groups = new ArrayList<Group>();
 	}
 	
 	public User(String name, String username, String email, String password)
@@ -55,7 +58,8 @@ public class User implements Serializable
 	
 	public boolean addTask(Task task)
 	{
-		return tasks.add(task);
+		tasks.add(task);
+		return true;
 	}
 	
 	public boolean removeTask(Task task)
