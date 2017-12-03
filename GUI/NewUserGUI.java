@@ -8,6 +8,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -62,6 +64,7 @@ public class NewUserGUI{
 		//Adds button action listeners
 		okButton.addActionListener(new buttonListener());
 		cancelButton.addActionListener(new buttonListener());
+		confirmField.addKeyListener(new keyListener());
 		
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -177,6 +180,45 @@ public class NewUserGUI{
 			
 		}
 		
+	}
+	
+	private class keyListener implements KeyListener
+	{
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER){
+				if(nameField.getText().isEmpty() || userNameField.getText().isEmpty() 
+						|| emailField.getText().isEmpty() || String.valueOf(passwordField.getPassword()).isEmpty())
+				{
+					JOptionPane.showMessageDialog(null, "Please fill in all blanks", "Warning",2);
+				}	
+				else if(String.valueOf(passwordField.getPassword()).equals(String.valueOf(confirmField.getPassword())))
+				{
+					User newUser = new User(nameField.getText(), userNameField.getText(), emailField.getText(), String.valueOf(passwordField.getPassword()));
+					turn.addUser(userNameField.getText(), newUser);
+					dialog.setVisible(false);
+					dialog.dispose();
+					JOptionPane.showMessageDialog(null, "Thank you for signing up!\n Please login", "Welcome new user!",-1);
+				}
+				else 
+				{
+					JOptionPane.showMessageDialog(null, "Passwords do not match", "Error", 0);
+				}
+	        }
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 	
 }
