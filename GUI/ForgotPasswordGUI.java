@@ -9,6 +9,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -59,6 +61,7 @@ public class ForgotPasswordGUI {
 		//Adds button action listeners
 		okButton.addActionListener(new buttonListener());
 		cancelButton.addActionListener(new buttonListener());
+		emailField.addKeyListener(new keyListener());
 		
 		JPanel panel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -231,6 +234,50 @@ public class ForgotPasswordGUI {
 			
 		}
 		
+	}
+	
+	private class keyListener implements KeyListener
+	{
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER){
+				if(emailField.getText().isEmpty() || userNameField.getText().isEmpty())
+					JOptionPane.showMessageDialog(null, "Please fill in all blanks", "Warning",2);
+				else
+				{
+					tempUser = turn.loginUser(userNameField.getText());
+					if(tempUser != null) 
+					{
+						if(emailField.getText().equals(tempUser.getEmail()))
+						{
+							ShowPasswordGUI();
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "The email entered does not match username", "Incorrect Email", 0);
+						}
+						
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "The username entered does not appear in our records!", "Incorrect Username", 0);
+					}
+				}
+	        }
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 
 }
