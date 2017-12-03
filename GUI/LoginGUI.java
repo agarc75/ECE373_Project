@@ -11,6 +11,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -104,9 +106,11 @@ public class LoginGUI extends JFrame
 		
 		//Action Listeners
 		loginButton.addActionListener(new buttonlistener());
+		passwordField.addKeyListener(new keyListener());
 		newUserLabel.addMouseListener(new linkListener());
 		forgotPasswordLabel.addMouseListener(new linkListener());
 		
+		//Changes java icon
 		BufferedImage myPicture = null;
 		
 		try {
@@ -116,15 +120,14 @@ public class LoginGUI extends JFrame
 		    exc.printStackTrace();
 		}
 		
+		//Picture
 		JLabel picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(50, 50, Image.SCALE_FAST)));
 		
-		
+		//Login GUI Formatting
 		d.gridwidth = 3;
 		d.gridx = 0;
 		d.weighty = 40;
 		turnsLogin.add(picLabel, d);
-		
-		
 		
 		
 		c.gridwidth = 1;
@@ -182,38 +185,40 @@ public class LoginGUI extends JFrame
 		public void actionPerformed(java.awt.event.ActionEvent e) {
 			JButton source = (JButton)(e.getSource());
 			if(source.equals(loginButton)) 
-			{
-				tempUser = turn.loginUser(userNameField.getText());
-				if(tempUser != null) 
-				{
-					if(tempUser.validatePassword(String.valueOf(passwordField.getPassword())))
-					{
-						turn.setCurrentUSer(tempUser);
-						setVisible(false);
-						dispose();
-						
-						//Goes into main Screen
-						new MainScreenGUI(turn);
-					}	
-					else
-					{
-						JOptionPane.showMessageDialog(null, "The password entered does not match our records!", "Incorrect Password", 0);
-						//System.out.println(passwordField.getPassword());
-					}
-				}
-				else
-				{
-					JOptionPane.showMessageDialog(null, "The Username entered does not exist.\nPlease feel free to create an account", "User Not Found", 1);
-				}
+			{				loginUser();
 			}
 			
 		}
 		
+		
+	}
+	
+	private class keyListener implements KeyListener
+	{
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if (e.getKeyCode() == KeyEvent.VK_ENTER){
+				System.out.println("Enter Pressed");
+				loginUser();
+	        }
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
 	}
 	
 	private class linkListener implements MouseListener
 	{
-
 		@Override
 		public void mouseClicked(MouseEvent e) 
 		{
@@ -248,6 +253,29 @@ public class LoginGUI extends JFrame
 			
 		}
 		
+	}
+	
+	public void loginUser() {
+		tempUser = turn.loginUser(userNameField.getText());
+		if(tempUser != null) 
+		{
+			if(tempUser.validatePassword(String.valueOf(passwordField.getPassword())))
+			{
+				turn.setCurrentUSer(tempUser);
+				setVisible(false);
+				dispose();
+				
+				//Goes into main Screen
+				new MainScreenGUI(turn);
+			}	
+			else{
+				JOptionPane.showMessageDialog(null, "The password entered does not match our records!", "Incorrect Password", 0);
+				//System.out.println(passwordField.getPassword());
+			}
+		}else
+		{
+			JOptionPane.showMessageDialog(null, "The Username entered does not exist.\nPlease feel free to create an account", "User Not Found", 1);
+		}
 	}
 	
 }
