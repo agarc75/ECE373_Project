@@ -119,7 +119,7 @@ public class MainScreenGUI extends JFrame
 		{
 			scrollPane.setPreferredSize(new Dimension(318, 500));
 		}else {
-			scrollPane.setPreferredSize(new Dimension(303, 500));
+			scrollPane.setPreferredSize(new Dimension(318, 500));
 		}
 		
 		add(scrollPane, BorderLayout.LINE_START);

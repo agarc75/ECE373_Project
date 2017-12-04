@@ -6,6 +6,7 @@ import GUI.MainMenuGUI.taskMenuGUI;
 import framework.Task;
 import framework.Turns;
 import framework.User;
+import java.util.GregorianCalendar;
 import sun.security.x509.IssuerAlternativeNameExtension;
 
 public class TurnsGUI
@@ -42,6 +43,7 @@ public class TurnsGUI
 		
 		task1.addUser(user2);
 		task1.nextUser();
+		task1.setDueDate(new GregorianCalendar(2017, 12, 4));
 		
 		task2.addUser(user2);
 		task2.addUser(user3);
@@ -84,7 +86,7 @@ public class TurnsGUI
 		turn.addUser("themytho", user3);
 		
 		//Loads data on startup
-		File tmpDir = new File("Turns.ser");
+		/*File tmpDir = new File("Turns.ser");
 		if(tmpDir.exists() == true)
 		{
 			turn = Turns.loadData();
@@ -92,16 +94,16 @@ public class TurnsGUI
 		else
 		{
 			Turns.saveData(turn);
-		}
+		}*/
 		
 		// LoginGUI(turn);
 		
 		//Bypasses login for testing
-		//turn.setCurrentUSer(user2);
-		//new MainScreenGUI(turn);
+		turn.setCurrentUSer(user1);
+		new MainScreenGUI(turn);
 		
-		taskMenuGUI temp = new taskMenuGUI(turn);
-		temp.newTaskGUI();
+		//taskMenuGUI temp = new taskMenuGUI(turn);
+		//temp.newTaskGUI();
 		
 		
 	}
