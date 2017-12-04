@@ -123,7 +123,6 @@ public class MainScreenGUI extends JFrame
 		}
 		
 		add(scrollPane, BorderLayout.LINE_START);
-		
 		add(currentGUI, BorderLayout.CENTER);
 		add(detailsGUI, BorderLayout.LINE_END);
 
@@ -149,17 +148,15 @@ public class MainScreenGUI extends JFrame
 	}
 	
 	public void refreshTaskList() {
-		//taskListsGUI.setVisible(false);
 		remove(scrollPane);
 		taskListsGUI = new TaskListGUI(turn, this);
-		JScrollPane scrollPane = new JScrollPane(taskListsGUI);
+		scrollPane = new JScrollPane(taskListsGUI);
 		if(turn.getCurrentUser().getTasks().size() > 10)
 		{
 			scrollPane.setPreferredSize(new Dimension(318, 500));
 		}else {
 			scrollPane.setPreferredSize(new Dimension(303, 500));
 		}
-		
 		System.out.println("Task List Refreshed");
 		add(scrollPane, BorderLayout.LINE_START);
 		repaint();

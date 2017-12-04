@@ -97,11 +97,11 @@ public class TurnsGUI
 		// LoginGUI(turn);
 		
 		//Bypasses login for testing
-		turn.setCurrentUSer(user2);
-		new MainScreenGUI(turn);
+		//turn.setCurrentUSer(user2);
+		//new MainScreenGUI(turn);
 		
-		//taskMenuGUI temp = new taskMenuGUI(turn);
-		//temp.newTaskGUI();
+		taskMenuGUI temp = new taskMenuGUI(turn);
+		temp.newTaskGUI();
 		
 		
 	}
