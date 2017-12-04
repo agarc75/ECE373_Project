@@ -152,6 +152,9 @@ public class CurrentTaskGUI extends JPanel {
 			   	default:
 			   		g.setColor(darkRed);
 			   		g.fillOval(xpos, ypos, radius, radius);
+			   		g.setColor(Color.WHITE);
+			   		g.setFont(userNameFont);
+			   		g.drawString(currentTask.getCurrentUser().getInitials(), xpos + radius /4 + 4, ypos + radius / 2 + 15);
 				break;
 			}
 		   }
