@@ -26,6 +26,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import GUI.MainMenuGUI.delMulTaskGUI;
 import GUI.MainMenuGUI.taskMenuGUI;
 import framework.Turns;
 
@@ -177,6 +178,11 @@ public class MainScreenGUI extends JFrame
 			
 			if(source.equals(refreshTaskList)) {
 				refreshTaskList();
+			}
+			
+			if(source.equals(deleteMulTaskItem)) {
+				delMulTaskGUI temp = new delMulTaskGUI(turn);
+				temp.newDelMulTaskGUI();
 			}
 		}
 	}
