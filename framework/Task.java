@@ -118,14 +118,19 @@ public class Task implements Serializable
 	
 	public void nextUser()
 	{
+		User tempUser = null;
+		
 		if (this.users.indexOf(this.currentuser) == this.users.size() - 1)
 		{
 			this.currentuser = this.users.get(0);
 		}
-		else
-		{
-			this.currentuser = this.users.get(this.users.indexOf(currentuser) + 1);
+		else {
+			tempUser = this.users.remove(0);
+			this.currentuser = this.users.get(0);
+			this.users.add(tempUser);
 		}
+		
+		
 	}
 	
 	public void changeOrder(int pos, User user)
