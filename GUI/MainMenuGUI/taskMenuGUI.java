@@ -2,6 +2,7 @@ package GUI.MainMenuGUI;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
@@ -10,6 +11,8 @@ import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -19,14 +22,17 @@ import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 import GUI.ForgotPasswordGUI;
 import GUI.NewUserGUI;
@@ -57,6 +63,11 @@ public class taskMenuGUI {
 	private Box vBox;
 	private int adduserCounter = 0;
 	
+	//For adding friends
+	private JScrollPane addFriendScroll;
+	private JPanel friendPanel;
+	private ArrayList<JCheckBox> btn = new ArrayList<JCheckBox>();
+	
 	public taskMenuGUI(Turns turn) {
 		this.turn = turn;
 	}
@@ -72,6 +83,7 @@ public class taskMenuGUI {
 		
 		//Adds button action listeners
 		addUsername.addMouseListener(new linkListener());
+		addFriends.addMouseListener(new linkListener());
 		okButton.addActionListener(new buttonListener());
 		cancelButton.addActionListener(new ActionListener() {
 			@Override
@@ -180,6 +192,51 @@ public class taskMenuGUI {
 		
 	}
 	
+	private void addFriendsGUI() {
+		ArrayList<User> friendsList = turn.getCurrentUser().getFriends();
+		GridBagConstraints c = new GridBagConstraints();
+		
+		panel.setVisible(false);
+		panel.remove(messageAddUser);
+		panel.remove(addUsername);
+		panel.remove(vBox);
+		panel.remove(addGroups);
+		panel.remove(addFriends);
+		
+		friendPanel = new JPanel();
+		friendPanel.setLayout(new BoxLayout(friendPanel, BoxLayout.Y_AXIS));
+		
+		for(int i = 0; i < friendsList.size(); i++)
+		{
+			btn.add(new JCheckBox(friendsList.get(i).getUsername()));
+			btn.get(i).addItemListener(new checkBoxListener());
+			friendPanel.add(btn.get(i));
+		}
+		
+		addFriendScroll = new JScrollPane(friendPanel);
+		addFriendScroll.setPreferredSize(new Dimension(200, 100));
+		
+		c.gridwidth = 0;
+		c.gridx = 0;
+		c.gridy = 3;
+		panel.add(addFriendScroll, c);
+		panel.setVisible(true);
+	}
+	
+	private class checkBoxListener implements ItemListener{
+		@Override
+		public void itemStateChanged(ItemEvent e) {
+			JCheckBox source = (JCheckBox)(e.getSource());
+			int index = btn.indexOf(e.getSource());
+			if(source.equals(btn.get(index)))
+			{
+				
+			}
+			
+		}
+		
+	}
+	
 	private class buttonListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -208,7 +265,6 @@ public class taskMenuGUI {
 				dialog.setVisible(false);
 				
 			}
-			
 		}
 	}
 	
@@ -229,6 +285,10 @@ public class taskMenuGUI {
 				JOptionPane.showMessageDialog(null, "You have reached the limit of users you can add to a task", "Limit reached", 0);
 			}
 			if(source.equals(addFriends)) {
+				addFriendsGUI();
+				
+			}
+			if(source.equals(addGroups)) {
 				
 			}
 			
