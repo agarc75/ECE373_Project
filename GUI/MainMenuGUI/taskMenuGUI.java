@@ -67,6 +67,9 @@ public class taskMenuGUI {
 	private JScrollPane addFriendScroll;
 	private JPanel friendPanel;
 	private ArrayList<JCheckBox> btn = new ArrayList<JCheckBox>();
+	private ArrayList<User> friendsList;
+	private ArrayList<User> tempUsers = new ArrayList<User>();
+	private JButton okButton2 = new JButton("Okay");
 	
 	public taskMenuGUI(Turns turn) {
 		this.turn = turn;
@@ -85,16 +88,7 @@ public class taskMenuGUI {
 		addUsername.addMouseListener(new linkListener());
 		addFriends.addMouseListener(new linkListener());
 		okButton.addActionListener(new buttonListener());
-		cancelButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				JButton source = (JButton)(e.getSource());
-				if(source.equals(cancelButton)) {
-					dialog.setVisible(false);
-					dialog.dispose();
-				}
-			}
-		});
+		cancelButton.addActionListener(new buttonListener());
 		
 		//Changes java icon
 		BufferedImage myPicture = null;
@@ -193,7 +187,7 @@ public class taskMenuGUI {
 	}
 	
 	private void addFriendsGUI() {
-		ArrayList<User> friendsList = turn.getCurrentUser().getFriends();
+		friendsList = turn.getCurrentUser().getFriends();
 		GridBagConstraints c = new GridBagConstraints();
 		
 		panel.setVisible(false);
@@ -202,6 +196,9 @@ public class taskMenuGUI {
 		panel.remove(vBox);
 		panel.remove(addGroups);
 		panel.remove(addFriends);
+		panel.remove(okButton);
+		
+		okButton2.addActionListener(new buttonListener());
 		
 		friendPanel = new JPanel();
 		friendPanel.setLayout(new BoxLayout(friendPanel, BoxLayout.Y_AXIS));
@@ -220,6 +217,14 @@ public class taskMenuGUI {
 		c.gridx = 0;
 		c.gridy = 3;
 		panel.add(addFriendScroll, c);
+		
+		c.gridwidth = 1;
+	    c.weighty = 5;
+		c.weightx = 2;
+		c.gridx = 0;
+	    c.gridy = 7;
+	    panel.add(okButton2, c);
+	    
 		panel.setVisible(true);
 	}
 	
@@ -230,7 +235,8 @@ public class taskMenuGUI {
 			int index = btn.indexOf(e.getSource());
 			if(source.equals(btn.get(index)))
 			{
-				
+				System.out.println("Called " + index);
+				tempUsers.add(turn.getCurrentUser().getFriends().get(index));
 			}
 			
 		}
@@ -243,6 +249,12 @@ public class taskMenuGUI {
 			JButton source = (JButton)(e.getSource());
 			if(source.equals(okButton))
 			{
+				if(taskNameField.getText().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null, "Please enter a Task Name", "Enter a name", 0);
+					return;
+				}
+				
 				String tempString = new String();
 				String tempUserString;
 				Task task = new Task(taskNameField.getText(), turn.getCurrentUser());
@@ -264,6 +276,25 @@ public class taskMenuGUI {
 				}
 				dialog.setVisible(false);
 				
+			}
+			if(source.equals(okButton2)) {
+				if(taskNameField.getText().isEmpty())
+				{
+					JOptionPane.showMessageDialog(null, "Please enter a Task Name", "Enter a name", 0);
+					return;
+				}
+				
+				Task task = new Task(taskNameField.getText(), turn.getCurrentUser());
+				for(int i = 0; i < tempUsers.size(); i++)
+				{
+					task.addUser(tempUsers.get(i));
+				}
+				dialog.setVisible(false);
+			}
+			
+			if(source.equals(cancelButton)) {
+				dialog.setVisible(false);
+				dialog.dispose();
 			}
 		}
 	}
