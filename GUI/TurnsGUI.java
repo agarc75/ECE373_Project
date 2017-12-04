@@ -1,5 +1,8 @@
 package GUI;
 
+import java.io.File;
+
+import GUI.MainMenuGUI.taskMenuGUI;
 import framework.Task;
 import framework.Turns;
 import framework.User;
@@ -14,8 +17,8 @@ public class TurnsGUI
 		//Test user
 		Turns turn = new Turns();
 		User user1 = new User("Rigo Avila", "ravila", "1", "1234");
-		User user2 = new User("Aza", "elguapo", "aza@gmail.com", "2468");
-		User user3 = new User("Aaron", "themyth", "aaron@aol.com", "1357");
+		User user2 = new User("Aza Cordova", "elguapo", "aza@gmail.com", "2468");
+		User user3 = new User("Aaron Garcia", "themyth", "aaron@aol.com", "1357");
 		User user4 = new User();
 		User user5 = new User();
 		User user6 = new User();
@@ -38,6 +41,7 @@ public class TurnsGUI
 		
 		
 		task1.addUser(user2);
+		task1.nextUser();
 		
 		task2.addUser(user2);
 		task2.addUser(user3);
@@ -45,11 +49,14 @@ public class TurnsGUI
 		task3.addUser(user2);
 		task3.addUser(user3);
 		task3.addUser(user4);
+		task3.nextUser();
 		
-		task4.addUser(user3);
 		task4.addUser(user2);
+		task4.addUser(user3);
 		task4.addUser(user4);
 		task4.addUser(user5);
+		task4.nextUser();
+		task4.nextUser();
 		
 		task5.addUser(user2);
 		task5.addUser(user3);
@@ -76,13 +83,25 @@ public class TurnsGUI
 		turn.addUser("elguapo", user2);
 		turn.addUser("themytho", user3);
 		
+		//Loads data on startup
+		File tmpDir = new File("Turns.ser");
+		if(tmpDir.exists() == true)
+		{
+			turn = Turns.loadData();
+		}
+		else
+		{
+			Turns.saveData(turn);
+		}
 		
-		new LoginGUI(turn);
+		// LoginGUI(turn);
 		
 		//Bypasses login for testing
-		//turn.setCurrentUSer(user2);
-		//new MainScreenGUI(turn);
+		turn.setCurrentUSer(user2);
+		new MainScreenGUI(turn);
 		
+		//taskMenuGUI temp = new taskMenuGUI(turn);
+		//temp.newTaskGUI();
 		
 		
 	}

@@ -185,7 +185,8 @@ public class LoginGUI extends JFrame
 		public void actionPerformed(java.awt.event.ActionEvent e) {
 			JButton source = (JButton)(e.getSource());
 			if(source.equals(loginButton)) 
-			{				loginUser();
+			{				
+				loginUser();
 			}
 			
 		}
