@@ -36,6 +36,11 @@ public class Turns implements Serializable
 		
 	}
 	
+	public User getUser(String userName)
+	{
+		return this.users.get(userName);
+	}
+	
 	public User loginUser(String userName) {
 		if(users.containsKey(userName)) {
 			return users.get(userName);

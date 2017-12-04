@@ -23,7 +23,7 @@ public class TurnsGUI
 		User user4 = new User();
 		User user5 = new User();
 		User user6 = new User();
-		User user7 = new User();
+		User user7 = new User("pleb", "pleb", null, null);
 		
 		
 		//test task
@@ -84,6 +84,7 @@ public class TurnsGUI
 		turn.addUser("ravila", user1);
 		turn.addUser("elguapo", user2);
 		turn.addUser("themytho", user3);
+		turn.addUser("pleb", user7);
 		
 		//Loads data on startup
 		/*File tmpDir = new File("Turns.ser");
