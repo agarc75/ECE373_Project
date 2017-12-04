@@ -14,8 +14,9 @@ public class Group implements Serializable
 	
 	public Group() 
 	{
-		this.name = "Unknown";
+		this.name = "";
 		this.members = null;
+		this.members = new ArrayList<User>();
 		
 	}
 	
@@ -37,9 +38,17 @@ public class Group implements Serializable
 		return this.members;
 	}
 	
-	public void addMember(User user)
+	public boolean addMember(User user)
 	{
-		this.members.add(user);
+		if(this.members.contains(user))
+		{
+			return false;
+		}
+		else {
+			this.members.add(user);
+			return true;
+		}
+		
 	}
 	
 	public void removeMember(User user)
