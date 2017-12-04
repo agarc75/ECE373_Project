@@ -5,15 +5,21 @@ import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
 import javax.swing.Box;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -60,6 +66,10 @@ public class taskMenuGUI {
 		
 		vBox = Box.createVerticalBox();
 		
+		addUsername.setForeground(Color.BLUE);
+		addFriends.setForeground(Color.BLUE);
+		addGroups.setForeground(Color.BLUE);
+		
 		//Adds button action listeners
 		addUsername.addMouseListener(new linkListener());
 		okButton.addActionListener(new buttonListener());
@@ -73,25 +83,46 @@ public class taskMenuGUI {
 				}
 			}
 		});
-		c.insets = new Insets(30, 5, 2, 5);
+		
+		//Changes java icon
+		BufferedImage myPicture = null;
+		
+		try {
+			myPicture = ImageIO.read(new File("./GUIItems/appLogo.PNG"));
+		}
+		 catch (IOException exc) {
+		    exc.printStackTrace();
+		}
+		
+		//Picture
+		JLabel picLabel = new JLabel(new ImageIcon(myPicture.getScaledInstance(50, 50, Image.SCALE_FAST)));
+		
+		//Login GUI Formatting
+		c.gridwidth = 3;
+		c.gridx = 0;
+		c.gridy = 0;
+		c.insets = new Insets(10, 5, 0, 5);
+		panel.add(picLabel, c);
+				
+		c.insets = new Insets(10, 5, 0, 5);
 		c.gridwidth = 1;
 		c.weighty = 5;
 		c.weightx = 2;
 		c.gridx = 0;
-	    c.gridy = 0;
+	    c.gridy = 1;
 		panel.add(taskName, c);
 		
 		c.weighty = 5;
 		c.weightx = 2;
 		c.gridx = 1;
-	    c.gridy = 0;
+	    c.gridy = 1;
 		panel.add(taskNameField, c);
 		
 		c = new GridBagConstraints();
-		c.insets = new Insets(5, 5, 1, 5);
+		c.insets = new Insets(5, 2, 1, 2);
 		c.gridwidth = 0;
 		c.gridx = 0;
-	    c.gridy = 1;
+	    c.gridy = 2;
 	    panel.add(messageAddUser, c);
 		
 		
@@ -103,25 +134,25 @@ public class taskMenuGUI {
 		c.weighty = 0;
 		c.weightx = 2;
 		c.gridx = 0;
-	    c.gridy = 2;
+	    c.gridy = 3;
 	    panel.add(vBox, c);
 	    
 	    c = new GridBagConstraints();
 	    c.gridwidth = 0;
 	    c.gridx = 0;
-	    c.gridy = 3;
+	    c.gridy = 4;
 	    c.insets = new Insets(5, 5, 20, 5);
 	    panel.add(addUsername, c);
 	    
 	    c.insets = new Insets(0, 5, 0, 5);
 	    c.gridwidth = 0;
 	    c.gridx = 0;
-	    c.gridy = 4;
+	    c.gridy = 5;
 	    panel.add(addFriends, c);
 	    
 	    c.gridwidth = 0;
 	    c.gridx = 0;
-	    c.gridy = 5;
+	    c.gridy = 6;
 	    panel.add(addGroups, c);
 	    
 	    
@@ -129,13 +160,13 @@ public class taskMenuGUI {
 	    c.weighty = 5;
 		c.weightx = 2;
 		c.gridx = 0;
-	    c.gridy = 6;
+	    c.gridy = 7;
 	    panel.add(okButton, c);
 		
 	    c.weighty = 5;
 		c.weightx = 2;
 		c.gridx = 1;
-	    c.gridy = 6;
+	    c.gridy = 7;
 		panel.add(cancelButton, c);
 		
 		dialog.setContentPane(panel);
@@ -156,23 +187,25 @@ public class taskMenuGUI {
 			if(source.equals(okButton))
 			{
 				String tempString = new String();
+				String tempUserString;
 				Task task = new Task(taskNameField.getText(), turn.getCurrentUser());
-				System.out.println("Added new task");
+				
 				for(int i = 0; i < userNameField.size(); i++)
 				{
-					User tempUser = turn.loginUser(userNameField.get(i).getText());
+					tempUserString = null;
+					tempUserString = userNameField.get(i).getText();
+					User tempUser = turn.loginUser(tempUserString);
 					if(tempUser != null) {
 						task.addUser(tempUser);
 					}
-					else if(tempUser == null && userNameField.get(i).getText() != null) {
+					else if(tempUser == null && !tempUserString.isEmpty()) {
 						tempString = tempString + "\n" + userNameField.get(i).getText();
 					}
-					
-					if(!tempString.isEmpty()) {
-						JOptionPane.showMessageDialog(null, "The following users were not found and were ignored" + tempString, "Users not found", 0);
-					}
-					dialog.setVisible(false);
 				}
+				if(!tempString.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "The following users were not found and were ignored" + tempString, "Users not found", 0);
+				}
+				dialog.setVisible(false);
 				
 			}
 			
