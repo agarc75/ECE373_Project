@@ -3,6 +3,7 @@ package GUI;
 import java.io.File;
 
 import GUI.MainMenuGUI.taskMenuGUI;
+import framework.Group;
 import framework.Task;
 import framework.Turns;
 import framework.User;
@@ -19,7 +20,7 @@ public class TurnsGUI
 		User user1 = new User("Rigo Avila", "ravila", "1", "1234");
 		User user2 = new User("Aza Cordova", "elguapo", "aza@gmail.com", "2468");
 		User user3 = new User("Aaron Garcia", "themyth", "aaron@aol.com", "1357");
-		User user4 = new User();
+		User user4 = new User("Hello World", "thelegend", "test@aol.com", "1234");
 		User user5 = new User();
 		User user6 = new User();
 		User user7 = new User();
@@ -83,6 +84,27 @@ public class TurnsGUI
 		turn.addUser("elguapo", user2);
 		turn.addUser("themytho", user3);
 		
+		user1.addFriend(user2);
+		user1.addFriend(user3);
+		user1.addFriend(user4);
+		user1.addFriend(user5);
+		user1.addFriend(user6);
+		user1.addFriend(user7);
+		
+		Group group1 = new Group("Roommates");
+		user1.addGroup(group1);
+		Group group2 = new Group("work");
+		user1.addGroup(group2);
+		Group group3 = new Group("home");
+		user1.addGroup(group3);
+		Group group4 = new Group("School");
+		user1.addGroup(group4);
+		
+		group1.addMember(user2);
+		group1.addMember(user3);
+		group1.addMember(user4);
+		
+		
 		//Loads data on startup
 		File tmpDir = new File("Turns.ser");
 		if(tmpDir.exists() == true)
@@ -94,14 +116,15 @@ public class TurnsGUI
 			Turns.saveData(turn);
 		}
 		
-		// LoginGUI(turn);
+		//new LoginGUI(turn);
 		
 		//Bypasses login for testing
-		//turn.setCurrentUSer(user2);
-		//new MainScreenGUI(turn);
+		turn.setCurrentUSer(user1);
+		new MainScreenGUI(turn);
 		
-		taskMenuGUI temp = new taskMenuGUI(turn);
-		temp.newTaskGUI();
+		//turn.setCurrentUSer(user1);
+		//taskMenuGUI temp = new taskMenuGUI(turn);
+		//temp.newTaskGUI();
 		
 		
 	}
