@@ -15,9 +15,13 @@ public class Group implements Serializable
 	public Group() 
 	{
 		this.name = "";
-		this.members = null;
 		this.members = new ArrayList<User>();
 		
+	}
+	
+	public Group(String name) {
+		this.name = name;
+		this.members = new ArrayList<User>();
 	}
 	
 	//methods for Group Class//
