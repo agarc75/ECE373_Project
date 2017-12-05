@@ -35,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import GUI.MainMenuGUI.delMulTaskGUI;
+import GUI.MainMenuGUI.newGroupGUI;
 import GUI.MainMenuGUI.taskMenuGUI;
 import GUI.MainMenuGUI.viewFriendsGUI;
 import GUI.MainMenuGUI.viewGroupGUI;
@@ -65,8 +66,8 @@ public class MainScreenGUI extends JFrame
 	private JMenuItem addFriendItem = new JMenuItem("Add a friend");
 	private JMenuItem removeFriendItem = new JMenuItem("Remove Friend");
 	private JMenuItem viewGroupItem = new JMenuItem("View Groups");
-	private JMenuItem newGroupItem = new JMenuItem("New  Groups");
-	private JMenuItem deleteGroupItem = new JMenuItem("Delete Groups");
+	private JMenuItem newGroupItem = new JMenuItem("New  Group");
+	private JMenuItem deleteGroupItem = new JMenuItem("Delete Group");
 	
 	//Account Menu
 	private JMenu accountMenu = new JMenu("Account Options");
@@ -282,6 +283,9 @@ public class MainScreenGUI extends JFrame
 			}
 			if(source.equals(viewGroupItem)) {
 				new viewGroupGUI(turn);
+			}
+			if(source.equals(newGroupItem)) {
+				new newGroupGUI(turn);
 			}
 		}
 	}
