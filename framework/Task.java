@@ -1,7 +1,7 @@
 package framework;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.GregorianCalendar;
 import java.io.Serializable;
 
 public class Task implements Serializable
@@ -10,7 +10,7 @@ public class Task implements Serializable
 	private User creator;
 	private ArrayList<User> users;
 	private User currentuser;
-	private Date duedate;
+	private GregorianCalendar duedate;
 	
 	public Task()
 	{
@@ -31,7 +31,7 @@ public class Task implements Serializable
 		users.add(creator);
 	}
 	
-	public Task(String name, User creator, Date duedate)
+	public Task(String name, User creator, GregorianCalendar duedate)
 	{
 		this.name = name;
 		this.creator = creator;
@@ -79,12 +79,12 @@ public class Task implements Serializable
 		return this.currentuser;
 	}
 	
-	public void setDueDate(Date adate)
+	public void setDueDate(GregorianCalendar adate)
 	{
 		this.duedate = adate;
 	}
 	
-	public Date getDate()
+	public GregorianCalendar getDate()
 	{
 		return this.duedate;
 	}
@@ -145,9 +145,13 @@ public class Task implements Serializable
 	public String getUserOrderString()
 	{
 		String temp = "";
-		temp += this.currentuser.getName();
+		int order = 1;
+		
+		temp += order + ") " + this.currentuser.getName();
+		order += 1;
 		
 		int currentUserIndex = this.users.indexOf(this.currentuser);
+		
 		
 		for (int i = currentUserIndex + 1; i != this.users.size(); ++i)
 		{
@@ -156,7 +160,9 @@ public class Task implements Serializable
 				i = 0;
 			}
 			
-			temp += ", " + this.users.get(i);
+			temp += "<br />" + order + ") " + this.users.get(i).getName();
+			
+			order += 1;
 		}
 			
 		return temp;

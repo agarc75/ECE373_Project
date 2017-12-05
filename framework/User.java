@@ -62,6 +62,18 @@ public class User implements Serializable
 		return true;
 	}
 	
+	public boolean deleteTask(Task task)
+	{
+		ArrayList<User> userList = task.getUserList();
+		
+		for (int i = 0; i < userList.size(); ++i)
+		{
+			userList.get(i).removeTask(task);
+		}
+		
+		return true;
+	}
+	
 	public boolean removeTask(Task task)
 	{
 		return tasks.remove(task);
