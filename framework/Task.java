@@ -108,6 +108,9 @@ public class Task implements Serializable
 	{
 		if(this.users.contains(user))
 		{
+			if(user == this.getCurrentUser()) {
+				this.nextUser();
+			}
 			this.users.remove(user);
 			return true;
 		}
@@ -144,7 +147,7 @@ public class Task implements Serializable
 	
 	public String getUserOrderString()
 	{
-		String temp = "";
+		String temp = new String();
 		int order = 1;
 		
 		temp += order + ") " + this.currentuser.getName() + ": " + this.currentuser.getUsername();
