@@ -160,6 +160,10 @@ public class NewUserGUI{
 				{
 					JOptionPane.showMessageDialog(null, "Please fill in all blanks", "Warning",2);
 				}	
+				else if(String.valueOf(passwordField.getPassword()).length() < 6) {
+					JOptionPane.showMessageDialog(null, "Password must be longer than 6 characters", "Error", 0);
+					return;
+				}
 				else if(String.valueOf(passwordField.getPassword()).equals(String.valueOf(confirmField.getPassword())))
 				{
 					User newUser = new User(nameField.getText(), userNameField.getText(), emailField.getText(), String.valueOf(passwordField.getPassword()));
@@ -192,6 +196,10 @@ public class NewUserGUI{
 				{
 					JOptionPane.showMessageDialog(null, "Please fill in all blanks", "Warning",2);
 				}	
+				else if(passwordField.getPassword().toString().length() < 6) {
+					JOptionPane.showMessageDialog(null, "Password must be longer than 6 characters", "Error", 0);
+					return;
+				}
 				else if(String.valueOf(passwordField.getPassword()).equals(String.valueOf(confirmField.getPassword())))
 				{
 					User newUser = new User(nameField.getText(), userNameField.getText(), emailField.getText(), String.valueOf(passwordField.getPassword()));
