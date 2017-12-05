@@ -43,12 +43,28 @@ public class User implements Serializable
 	
 	public boolean addFriend(User user)
 	{
-		return friends.add(user);
+		if(this.friends.contains(user))
+		{
+			return false;
+		}
+		else
+		{
+			friends.add(user);
+			return true;
+		}
 	}
 	
 	public boolean removeFriend(User user)
 	{
-		return friends.remove(user);
+		if(this.friends.contains(user))
+		{
+			friends.remove(user);
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
 	
 	public ArrayList<User> getFriends()
