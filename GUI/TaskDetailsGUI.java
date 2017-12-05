@@ -147,7 +147,15 @@ public class TaskDetailsGUI extends JPanel
 		}
 		
 		JScrollPane buttonScroll = new JScrollPane(buttonPanel);
-		buttonScroll.setPreferredSize(new Dimension(300, 54));
+		
+		if (buttonPanel.getComponentCount() > 2)
+		{
+			buttonScroll.setPreferredSize(new Dimension(300, 54));
+		}
+		else
+		{
+			buttonScroll.setPreferredSize(new Dimension(300, 36));
+		}
 		
 		add(buttonScroll);
 		
