@@ -147,7 +147,7 @@ public class Task implements Serializable
 		String temp = "";
 		int order = 1;
 		
-		temp += order + ") " + this.currentuser.getName();
+		temp += order + ") " + this.currentuser.getName() + ": " + this.currentuser.getUsername();
 		order += 1;
 		
 		int currentUserIndex = this.users.indexOf(this.currentuser);
@@ -160,7 +160,7 @@ public class Task implements Serializable
 				i = 0;
 			}
 			
-			temp += "<br />" + order + ") " + this.users.get(i).getName();
+			temp += "<br />" + order + ") " + this.users.get(i).getName() + ": " + this.users.get(i).getUsername();
 			
 			order += 1;
 		}

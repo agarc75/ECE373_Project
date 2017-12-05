@@ -38,13 +38,17 @@ import javax.swing.SwingConstants;
 
 import framework.Task;
 import framework.Turns;
+import framework.User;
 
 public class TaskDetailsGUI extends JPanel
 {
 	Task aTask;
+	Turns aTurn;
 	public TaskDetailsGUI (Turns turn, Task task)
 	{
 		aTask = task;
+		aTurn = turn;
+		
 		if(task == null)
 		{
 			setPreferredSize(new Dimension(300, 300));
@@ -170,7 +174,22 @@ public class TaskDetailsGUI extends JPanel
 			}
 			else if (toggledText.equals("Add User"))
 			{
+				String user = JOptionPane.showInputDialog(null, "Enter Username to Add.", "Add User", JOptionPane.OK_CANCEL_OPTION);
+				User temp = aTurn.getUser(user);
 				
+				if (temp != null)
+				{
+					aTask.addUser(temp);
+					JOptionPane.showMessageDialog(null, temp.getName() + " has been added to the task");
+				}
+				else if (!user.equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "User Does Not Exist");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No User Added", "Turns", JOptionPane.OK_OPTION);
+				}
 			}
 			else if (toggledText.equals("Delete Task"))
 			{
@@ -183,7 +202,22 @@ public class TaskDetailsGUI extends JPanel
 			}
 			else if (toggledText.equals("Remove User"))
 			{
+				String user = JOptionPane.showInputDialog(null, "Enter Username to Remove.");
+				User temp = aTurn.getUser(user);
 				
+				if (aTask.getUserList().contains(temp))
+				{
+					aTask.removeUser(temp);
+					JOptionPane.showMessageDialog(null, temp.getName() + " has been removed from the task");
+				}
+				else if (!user.equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "User Does Not Exist Or Is Not In The Task");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No User Removed", "Turns", JOptionPane.OK_OPTION);
+				}
 			}
 		}
 		

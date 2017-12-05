@@ -24,7 +24,7 @@ public class TurnsGUI
 		User user4 = new User("Hello World", "thelegend", "test@aol.com", "1234");
 		User user5 = new User();
 		User user6 = new User();
-		User user7 = new User();
+		User user7 = new User("pleb", "pleb", null, null);
 		
 		
 		//test task
@@ -85,6 +85,7 @@ public class TurnsGUI
 		turn.addUser("ravila", user1);
 		turn.addUser("elguapo", user2);
 		turn.addUser("themytho", user3);
+		turn.addUser("pleb", user7);
 		
 		user1.addFriend(user2);
 		user1.addFriend(user3);
