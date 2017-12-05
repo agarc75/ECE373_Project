@@ -6,10 +6,14 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.ScrollPane;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -17,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.naming.event.NamingListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -32,6 +37,7 @@ import javax.swing.JScrollPane;
 import GUI.MainMenuGUI.delMulTaskGUI;
 import GUI.MainMenuGUI.taskMenuGUI;
 import GUI.MainMenuGUI.viewFriendsGUI;
+import GUI.MainMenuGUI.viewGroupGUI;
 import framework.Turns;
 import framework.User;
 
@@ -51,7 +57,7 @@ public class MainScreenGUI extends JFrame
 	private JMenu taskMenu = new JMenu("Tasks Options");
 	private JMenuItem newTaskItem = new JMenuItem("Create new Task");
 	private JMenuItem deleteMulTaskItem = new JMenuItem("Delete Multipe Tasks");
-	private JMenuItem refreshTaskList = new JMenuItem("Refresh Task Lists");
+	private JMenuItem refreshTaskList = new JMenuItem("Refresh Task Lists (F5)");
 	
 	//Friend Menu
 	private JMenu friendMenu = new JMenu("Friend Options");
@@ -79,6 +85,9 @@ public class MainScreenGUI extends JFrame
 		newTaskItem.addActionListener(new menuListener());
 		deleteMulTaskItem.addActionListener(new menuListener());
 		refreshTaskList.addActionListener(new menuListener());
+		
+		//Enables F5 refresh
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new keyListener());
 		
 		addFriendItem.addActionListener(new menuListener());
 		viewFriendItem.addActionListener(new menuListener());
@@ -181,6 +190,21 @@ public class MainScreenGUI extends JFrame
 		revalidate();
 	}
 	
+	private class keyListener implements KeyEventDispatcher
+	{
+
+		@Override
+		public boolean dispatchKeyEvent(KeyEvent e) {
+			if(e.getKeyCode() == KeyEvent.VK_F5) {
+				System.out.println("F5 pressed");
+				refreshTaskList();
+				return true;
+			}
+			return false;
+		}
+		
+	}
+	
 	
 	
 	public class menuListener implements ActionListener
@@ -255,6 +279,9 @@ public class MainScreenGUI extends JFrame
 			
 			if(source.equals(viewFriendItem)) {
 				new viewFriendsGUI(turn);
+			}
+			if(source.equals(viewGroupItem)) {
+				new viewGroupGUI(turn);
 			}
 		}
 	}
