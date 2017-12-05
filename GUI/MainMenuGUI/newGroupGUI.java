@@ -26,12 +26,13 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 
 import framework.Turns;
 import framework.User;
 
 public class newGroupGUI {
-private Turns turn = null;
+	private Turns turn = null;
 	
 	private JDialog dialog = new JDialog();
 	private JPanel panel = new JPanel(new GridBagLayout());
@@ -48,7 +49,10 @@ private Turns turn = null;
 	
 	//Labels
 	private JLabel groupLabel = new JLabel("Select the friends ou want to add to this group");
-
+	private JLabel enterNameLabel = new JLabel("Enter a name for this group");
+	
+	//Fields
+	private JTextField enterNameField = new JTextField(12);
 	
 	//Selecting friends
 	private ArrayList<JCheckBox> btn = new ArrayList<JCheckBox>();
@@ -61,8 +65,9 @@ private Turns turn = null;
 	
 	public void buildNewGroupGUI() {
 		panel.setBackground(Color.LIGHT_GRAY);
-		panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+		
+		friendPanel = new JPanel();
+		//panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		friendPanel.setLayout(new BoxLayout(friendPanel, BoxLayout.Y_AXIS));
 		
@@ -73,7 +78,7 @@ private Turns turn = null;
 		BufferedImage myPicture = null;
 		
 		try {
-			myPicture = ImageIO.read(new File("./GUIItems/deleteLogo.PNG"));
+			myPicture = ImageIO.read(new File("./GUIItems/appLogo.PNG"));
 		}
 		 catch (IOException exc) {
 		    exc.printStackTrace();
@@ -100,11 +105,23 @@ private Turns turn = null;
 		c.insets = new Insets(10, 5, 0, 5);
 		panel.add(picLabel, c);
 		
-		c.gridwidth = 0;
+		
+		c.gridwidth = 1;
+		c.weightx = 5;
 		c.gridx = 0;
 		c.gridy = 1;
+		c.ipadx = 5;
+		panel.add(enterNameLabel, c);
+		
+		c.gridx = 1;
+		panel.add(enterNameField, c);
+		
+		c.gridwidth = 0;
+		c.gridx = 0;
+		c.gridy = 2;
 		panel.add(groupLabel, c);
 		
+		c = new GridBagConstraints();
 		c.gridwidth = 0;
 		c.gridx = 0;
 		c.gridy = 3;
@@ -127,7 +144,7 @@ private Turns turn = null;
 		//Used to center on page
 		dialog.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width)/2 - 150,
 				(Toolkit.getDefaultToolkit().getScreenSize().height)/2 - 200);
-		dialog.setTitle("Delete Multiple Tasks");
+		dialog.setTitle("Create a new Group");
 		dialog.setSize(350, 400);
 		dialog.setVisible(true);
 	}
