@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -49,10 +50,11 @@ public class delMulTaskGUI {
 	private JPanel taskPanel;
 	private ArrayList<JCheckBox> btn = new ArrayList<JCheckBox>();
 	private ArrayList<Task> taskList = null;
-	private ArrayList<Integer> tempTasksIndex = new ArrayList<Integer>();
+	private ArrayList<Task> delTempTasks = new ArrayList<Task>();
 	
 	public delMulTaskGUI(Turns turn) {
 		this.turn = turn;
+		this.taskList = turn.getCurrentUser().getTasks();
 	}
 	
 	public void newDelMulTaskGUI() {
@@ -136,6 +138,23 @@ public class delMulTaskGUI {
 			JButton source = (JButton)(e.getSource());
 			if(source.equals(okButton))
 			{
+				int n = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete all these task", "Confirm", JOptionPane.YES_NO_OPTION);
+				if(n != JOptionPane.YES_OPTION) {
+					return;
+				}
+				n = JOptionPane.showConfirmDialog(null, "This is irreversible. Are you 100% sure?", "Caution", 0);
+				if(n != JOptionPane.YES_OPTION)
+				{
+					return;
+				}
+				
+				
+				for(int i = 0; i < delTempTasks.size(); i++)
+				{
+					turn.getCurrentUser().deleteTask(delTempTasks.get(i));
+				}
+				dialog.setVisible(false);
+				dialog.dispose();
 				
 			}
 			if(source.equals(cancelButton))
@@ -155,7 +174,17 @@ public class delMulTaskGUI {
 			int index = btn.indexOf(e.getSource());
 			if(source.equals(btn.get(index)))
 			{
-				tempTasksIndex.add(index);
+				if(btn.get(index).isSelected())
+				{
+					System.out.println("Selected" + index);
+					delTempTasks.add(taskList.get(index));
+				}
+				else if(btn.get(index).isSelected() == false)
+				{
+					System.out.println("Deselected "+ index);
+					delTempTasks.remove(taskList.get(index));
+				}
+				
 			}
 		}
 	}
