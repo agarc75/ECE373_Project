@@ -71,7 +71,7 @@ public class MainScreenGUI extends JFrame
 	
 	//Account Menu
 	private JMenu accountMenu = new JMenu("Account Options");
-	private JMenuItem editAccountItem = new JMenuItem("Edit account information");
+	//private JMenuItem editAccountItem = new JMenuItem("Edit account information");
 	private JMenuItem logoutItem = new JMenuItem("Logout from Turns");
 	
 	public MainScreenGUI(Turns turn) {
@@ -97,7 +97,7 @@ public class MainScreenGUI extends JFrame
 		newGroupItem.addActionListener(new menuListener());
 		deleteGroupItem.addActionListener(new menuListener());
 		
-		editAccountItem.addActionListener(new menuListener());
+		//editAccountItem.addActionListener(new menuListener());
 		logoutItem.addActionListener(new menuListener());
 		
 		
@@ -115,7 +115,7 @@ public class MainScreenGUI extends JFrame
 		friendMenu.add(deleteGroupItem);
 		
 		menuBar.add(accountMenu);
-		accountMenu.add(editAccountItem);
+		//accountMenu.add(editAccountItem);
 		accountMenu.add(logoutItem);
 		
 		menuBar.setVisible(true);
@@ -297,6 +297,15 @@ public class MainScreenGUI extends JFrame
 			if(source.equals(deleteGroupItem)) {
 				GroupMenuGUI groupGUI= new GroupMenuGUI(turn);
 				groupGUI.buildDeleteGroupGUI();
+			}
+			if(source.equals(logoutItem))
+			{
+				if(JOptionPane.showConfirmDialog(null, "Are You Sure YouWant To Logout?", "Logout?", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
+				{
+					dispose();
+					Turns.saveData(turn);
+					new LoginGUI(turn);
+				}
 			}
 		}
 	}
