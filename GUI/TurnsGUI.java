@@ -123,6 +123,8 @@ public class TurnsGUI
 		
 		//Bypasses login for testing
 		turn.setCurrentUSer(user1);
+		
+		turn = Turns.loadData();
 		new MainScreenGUI(turn);
 		
 
