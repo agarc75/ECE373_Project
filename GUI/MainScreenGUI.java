@@ -300,7 +300,7 @@ public class MainScreenGUI extends JFrame
 			}
 			if(source.equals(logoutItem))
 			{
-				if(JOptionPane.showConfirmDialog(null, "Are You Sure YouWant To Logout?", "Logout?", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
+				if(JOptionPane.showConfirmDialog(null, "Are You Sure You Want To Logout?", "Logout?", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
 				{
 					dispose();
 					Turns.saveData(turn);
