@@ -38,7 +38,7 @@ import GUI.MainMenuGUI.delMulTaskGUI;
 import GUI.MainMenuGUI.newGroupGUI;
 import GUI.MainMenuGUI.taskMenuGUI;
 import GUI.MainMenuGUI.viewFriendsGUI;
-import GUI.MainMenuGUI.viewGroupGUI;
+import GUI.MainMenuGUI.GroupMenuGUI;
 import framework.Turns;
 import framework.User;
 
@@ -176,6 +176,12 @@ public class MainScreenGUI extends JFrame
 	}
 	
 	public void refreshTaskList() {
+		currentGUI.setVisible(false);
+		remove(currentGUI);
+		detailsGUI.setVisible(false);
+		remove(detailsGUI);
+		add(detailsGUI = new TaskDetailsGUI(turn, turn.getCurrentTask()), BorderLayout.LINE_END);
+		add(currentGUI = new CurrentTaskGUI(turn, turn.getCurrentTask()), BorderLayout.CENTER);
 		remove(scrollPane);
 		taskListsGUI = new TaskListGUI(turn, this);
 		scrollPane = new JScrollPane(taskListsGUI);
@@ -282,10 +288,15 @@ public class MainScreenGUI extends JFrame
 				new viewFriendsGUI(turn);
 			}
 			if(source.equals(viewGroupItem)) {
-				new viewGroupGUI(turn);
+				GroupMenuGUI groupGUI= new GroupMenuGUI(turn);
+				groupGUI.buildViewGroupGUI();;
 			}
 			if(source.equals(newGroupItem)) {
 				new newGroupGUI(turn);
+			}
+			if(source.equals(deleteGroupItem)) {
+				GroupMenuGUI groupGUI= new GroupMenuGUI(turn);
+				groupGUI.buildDeleteGroupGUI();
 			}
 		}
 	}

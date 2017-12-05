@@ -94,6 +94,10 @@ public class CurrentTaskGUI extends JPanel {
 			   		
 			   		g.setColor(Color.ORANGE);
 			   		g.fillOval(xpos, ypos + 200, radius, radius);
+			   		g.setColor(Color.GRAY);
+			   		g.setFont(userNameFont);
+			   		g.drawString(currentTask.getUserList().get(1).getInitials(), xpos + radius /4 + 10, ypos + radius / 2 + 15 + 200);
+			   	
 				
 				break;
 			   	case 3:
@@ -108,7 +112,10 @@ public class CurrentTaskGUI extends JPanel {
 				   
 			   		g.setColor(Color.ORANGE);
 			   		g.fillOval(xpos - 100, ypos + 200, radius, radius);
-					
+			   		g.setColor(Color.GRAY);
+			   		g.setFont(userNameFont);
+			   		g.drawString(currentTask.getUserList().get(1).getInitials(), xpos + radius /4 + 10 - 100, ypos + radius / 2 + 15 + 200);
+			   	
 				break;
 			   	case 4:
 			   		g.setColor(darkRed);
@@ -125,6 +132,10 @@ public class CurrentTaskGUI extends JPanel {
 				   
 			   		g.setColor(Color.ORANGE);
 			   		g.fillOval(xpos - 100, ypos + 150, radius, radius);
+			   		g.setColor(Color.GRAY);
+			   		g.setFont(userNameFont);
+			   		g.drawString(currentTask.getUserList().get(1).getInitials(), xpos + radius /4 + 10 - 100, ypos + radius / 2 + 15 + 150);
+			   	
 				break;
 			   	case 5:
 			   		xpos+=18;
@@ -146,15 +157,30 @@ public class CurrentTaskGUI extends JPanel {
 				   
 			   		g.setColor(Color.ORANGE);
 			   		g.fillOval(xpos - 150, ypos + 100, radius, radius);
+			   		g.setColor(Color.GRAY);
+			   		g.setFont(userNameFont);
+			   		g.drawString(currentTask.getUserList().get(1).getInitials(), xpos + radius /4 + 10 - 160, ypos + radius / 2 + 15 + 100);
 			   	
 			   	break;
 	
 			   	default:
+			   		BufferedImage myTurnArrows= null;
+					ypos=+150;
+					
+					try {
+						myCircleBackground = ImageIO.read(new File("./GUIItems/arrow1.png"));
+					}
+					 catch (IOException exc) {
+					    exc.printStackTrace();
+					}
+					
+					g.drawImage(myCircleBackground.getScaledInstance(300, 300, Image.SCALE_FAST), xpos - 75, ypos - 80, null);
+					
 			   		g.setColor(darkRed);
 			   		g.fillOval(xpos, ypos, radius, radius);
 			   		g.setColor(Color.WHITE);
 			   		g.setFont(userNameFont);
-			   		g.drawString(currentTask.getCurrentUser().getInitials(), xpos + radius /4 + 4, ypos + radius / 2 + 15);
+			   		g.drawString(currentTask.getCurrentUser().getInitials(), xpos + radius /4 + 10, ypos + radius / 2 + 15);
 				break;
 			}
 		   }

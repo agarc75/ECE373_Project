@@ -178,6 +178,10 @@ public class TaskDetailsGUI extends JPanel
 				if (n == JOptionPane.YES_OPTION)
 				{
 					aTask.nextUser();
+					setVisible(false);
+					revalidate();
+					repaint();
+					setVisible(true);
 				}
 			}
 			else if (toggledText.equals("Add User"))

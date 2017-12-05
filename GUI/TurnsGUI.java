@@ -139,8 +139,8 @@ public class TurnsGUI
 			turn = Turns.loadData();
 		}
 		
-		new LoginGUI(turn);
-		//new MainScreenGUI(turn);
+		//new LoginGUI(turn);
+		new MainScreenGUI(turn);
 		
 
 		//taskMenuGUI temp = new taskMenuGUI(turn);
