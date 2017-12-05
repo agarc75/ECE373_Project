@@ -20,15 +20,19 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import GUI.MainMenuGUI.delMulTaskGUI;
 import GUI.MainMenuGUI.taskMenuGUI;
+import GUI.MainMenuGUI.viewFriendsGUI;
 import framework.Turns;
+import framework.User;
 
 public class MainScreenGUI extends JFrame
 {
@@ -50,6 +54,7 @@ public class MainScreenGUI extends JFrame
 	
 	//Friend Menu
 	private JMenu friendMenu = new JMenu("Friend Options");
+	private JMenuItem viewFriendItem = new JMenuItem("View Friend List");
 	private JMenuItem addFriendItem = new JMenuItem("Add a friend");
 	private JMenuItem removeFriendItem = new JMenuItem("Remove Friend");
 	private JMenuItem viewGroupItem = new JMenuItem("View Groups");
@@ -75,6 +80,7 @@ public class MainScreenGUI extends JFrame
 		refreshTaskList.addActionListener(new menuListener());
 		
 		addFriendItem.addActionListener(new menuListener());
+		viewFriendItem.addActionListener(new menuListener());
 		removeFriendItem.addActionListener(new menuListener());
 		viewGroupItem.addActionListener(new menuListener());
 		newGroupItem.addActionListener(new menuListener());
@@ -90,6 +96,7 @@ public class MainScreenGUI extends JFrame
 		taskMenu.add(refreshTaskList);
 		
 		menuBar.add(friendMenu);
+		friendMenu.add(viewFriendItem);
 		friendMenu.add(addFriendItem);
 		friendMenu.add(removeFriendItem);
 		friendMenu.add(viewGroupItem);
@@ -120,7 +127,7 @@ public class MainScreenGUI extends JFrame
 		{
 			scrollPane.setPreferredSize(new Dimension(318, 500));
 		}else {
-			scrollPane.setPreferredSize(new Dimension(318, 500));
+			scrollPane.setPreferredSize(new Dimension(303, 500));
 		}
 		
 		add(scrollPane, BorderLayout.LINE_START);
@@ -183,6 +190,61 @@ public class MainScreenGUI extends JFrame
 			if(source.equals(deleteMulTaskItem)) {
 				delMulTaskGUI temp = new delMulTaskGUI(turn);
 				temp.newDelMulTaskGUI();
+			}
+			if(source.equals(addFriendItem))
+			{
+				String user = JOptionPane.showInputDialog(null, "Enter Username to Add.", "Add Friend", JOptionPane.OK_CANCEL_OPTION);
+				User temp = turn.getUser(user);
+				
+				if (temp != null)
+				{
+					
+					if(turn.getCurrentUser().addFriend(temp)) {
+						JOptionPane.showMessageDialog(null, temp.getName() + " has been added your friend list");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, temp.getName() + " is already in your friend list");
+					}
+					
+				}
+				else if (!user.equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "User Does Not Exist");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No User Added", "Turns", JOptionPane.OK_OPTION);
+				}
+			}
+			
+			if(source.equals(removeFriendItem))
+			{
+				String user = JOptionPane.showInputDialog(null, "Enter Username to remove", "Remove Friend", JOptionPane.OK_CANCEL_OPTION);
+				User temp = turn.getUser(user);
+				
+				if (temp != null)
+				{
+					
+					if(turn.getCurrentUser().removeFriend(temp)) {
+						JOptionPane.showMessageDialog(null, temp.getName() + " has been removed from yout friend list");
+					}
+					else {
+						JOptionPane.showMessageDialog(null, temp.getName() + " is not in your friend list");
+					}
+					
+				}
+				else if (!user.equals(""))
+				{
+					JOptionPane.showMessageDialog(null, "User Does Not Exist");
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "No User removed", "Turns", JOptionPane.OK_OPTION);
+				}
+			}
+			
+			if(source.equals(viewFriendItem)) {
+				new viewFriendsGUI(turn);
 			}
 		}
 	}
