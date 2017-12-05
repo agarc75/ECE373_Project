@@ -84,7 +84,7 @@ public class TurnsGUI
 		
 		turn.addUser("ravila", user1);
 		turn.addUser("elguapo", user2);
-		turn.addUser("themytho", user3);
+		turn.addUser("themyth", user3);
 		turn.addUser("pleb", user7);
 		
 		user1.addFriend(user2);
@@ -119,12 +119,13 @@ public class TurnsGUI
 			Turns.saveData(turn);
 		}*/
 		
+		turn = Turns.loadData();
 		//new LoginGUI(turn);
 		
 		//Bypasses login for testing
-		turn.setCurrentUSer(user1);
+		//turn.setCurrentUSer(user1);
 		
-		turn = Turns.loadData();
+		
 		new MainScreenGUI(turn);
 		
 
