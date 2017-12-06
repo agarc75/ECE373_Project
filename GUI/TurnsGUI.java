@@ -137,7 +137,13 @@ public class TurnsGUI
 			Turns.saveData(turn);
 		}*/
 	
-		
+		File tmpDir = new File("Turns.ser");
+		boolean exists = tmpDir.exists();
+		if(exists == false) {
+			File file = new File("Turns.ser");
+			file.createNewFile();
+			System.out.println("File created");
+		}
 		
 		//Bypasses login for testing
 		//turn.setCurrentUSer(user1);
