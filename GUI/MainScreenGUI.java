@@ -155,6 +155,8 @@ public class MainScreenGUI extends JFrame
 					@Override
 					public void windowClosing(WindowEvent e)
 					{
+						turn.setCurrentUSer(null);
+						turn.setCurrentTask(null);
 						Turns.saveData(turn);
 						System.exit(0);
 					}
@@ -180,8 +182,10 @@ public class MainScreenGUI extends JFrame
 		remove(currentGUI);
 		detailsGUI.setVisible(false);
 		remove(detailsGUI);
-		add(detailsGUI = new TaskDetailsGUI(turn, turn.getCurrentTask()), BorderLayout.LINE_END);
-		add(currentGUI = new CurrentTaskGUI(turn, turn.getCurrentTask()), BorderLayout.CENTER);
+		detailsGUI = new TaskDetailsGUI(turn, turn.getCurrentTask());
+		currentGUI  = new CurrentTaskGUI(turn, turn.getCurrentTask());
+		add(detailsGUI, BorderLayout.LINE_END);
+		add(currentGUI, BorderLayout.CENTER);
 		remove(scrollPane);
 		taskListsGUI = new TaskListGUI(turn, this);
 		scrollPane = new JScrollPane(taskListsGUI);
@@ -203,7 +207,6 @@ public class MainScreenGUI extends JFrame
 		@Override
 		public boolean dispatchKeyEvent(KeyEvent e) {
 			if(e.getKeyCode() == KeyEvent.VK_F5) {
-				System.out.println("F5 pressed");
 				refreshTaskList();
 				return true;
 			}
@@ -235,6 +238,10 @@ public class MainScreenGUI extends JFrame
 			if(source.equals(addFriendItem))
 			{
 				String user = JOptionPane.showInputDialog(null, "Enter Username to Add.", "Add Friend", JOptionPane.OK_CANCEL_OPTION);
+				if(user == null) {
+					return;
+				}
+				
 				User temp = turn.getUser(user);
 				
 				if (temp != null)
@@ -261,6 +268,9 @@ public class MainScreenGUI extends JFrame
 			if(source.equals(removeFriendItem))
 			{
 				String user = JOptionPane.showInputDialog(null, "Enter Username to remove", "Remove Friend", JOptionPane.OK_CANCEL_OPTION);
+				if(user == null) {
+					return;
+				}
 				User temp = turn.getUser(user);
 				
 				if (temp != null)
@@ -302,8 +312,13 @@ public class MainScreenGUI extends JFrame
 			{
 				if(JOptionPane.showConfirmDialog(null, "Are You Sure You Want To Logout?", "Logout?", JOptionPane.OK_CANCEL_OPTION) == JOptionPane.OK_OPTION)
 				{
+					remove(detailsGUI);
+					remove(currentGUI);
+					turn.setCurrentUSer(null);
+					turn.setCurrentTask(null);
 					dispose();
 					Turns.saveData(turn);
+					System.gc();
 					new LoginGUI(turn);
 				}
 			}

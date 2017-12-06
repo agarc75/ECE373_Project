@@ -167,10 +167,18 @@ public class NewUserGUI{
 				else if(String.valueOf(passwordField.getPassword()).equals(String.valueOf(confirmField.getPassword())))
 				{
 					User newUser = new User(nameField.getText(), userNameField.getText(), emailField.getText(), String.valueOf(passwordField.getPassword()));
-					turn.addUser(userNameField.getText(), newUser);
-					dialog.setVisible(false);
-					dialog.dispose();
-					JOptionPane.showMessageDialog(null, "Thank you for signing up!\n Please login", "Welcome new user!",-1);
+					
+					if(turn.userExists(newUser))
+					{
+						JOptionPane.showMessageDialog(null, "Username is already taken");
+					}
+					else
+					{
+						turn.addUser(userNameField.getText(), newUser);
+						dialog.setVisible(false);
+						dialog.dispose();
+						JOptionPane.showMessageDialog(null, "Thank you for signing up!\n Please login", "Welcome new user!",-1);
+					}
 				}
 				else 
 				{

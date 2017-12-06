@@ -22,7 +22,7 @@ public class TurnsGUI
 	{	
 		//Test user
 		Turns turn = new Turns();
-		User user1 = new User("Rigo Avila", "ravila", "1", "1234");
+		User user1 = new User("Rigo Avila", "ravila", "1", "123456");
 		User user2 = new User("Aza Cordova", "elguapo", "aza@gmail.com", "123456");
 		User user3 = new User("Aaron Garcia", "themyth", "aaron@aol.com", "123456");
 		User user4 = new User("Kevin Fish", "thelegend", "test@aol.com", "123456");
@@ -37,9 +37,9 @@ public class TurnsGUI
 		Task task3 = new Task("Copy Paper", user1);
 		Task task4 = new Task("Finalize Budget", user1);
 		Task task5 = new Task("Can't Delete", user2);
-		Task task7 = new Task("Not your turn", user2);
+		Task task7 = new Task("Not your turn", user1);
 		Task task8 = new Task("More than 5", user1);
-		Task task9 = new Task("Stuff4", user1);
+		Task task9 = new Task("Remove User", user1);
 		Task task10 = new Task("Stuff5", user1);
 		Task task11 = new Task("Stuff6", user1);
 		Task task12 = new Task("Stuff7", user1);
@@ -82,6 +82,7 @@ public class TurnsGUI
 		
 		task9.addUser(user2);
 		task9.addUser(user3);
+		task9.addUser(user4);
 		task10.addUser(user2);
 		task10.addUser(user3);
 		task11.addUser(user2);

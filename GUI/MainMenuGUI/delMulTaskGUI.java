@@ -151,7 +151,14 @@ public class delMulTaskGUI {
 				
 				for(int i = 0; i < delTempTasks.size(); i++)
 				{
-					turn.getCurrentUser().deleteTask(delTempTasks.get(i));
+					if(delTempTasks.get(i).getCreator() == turn.getCurrentUser()) {
+						turn.getCurrentUser().deleteTask(delTempTasks.get(i));
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Task \"" + delTempTasks.get(i).getName() + "\" is not yours to delete" , "Error", 0);
+					}
+					
 				}
 				dialog.setVisible(false);
 				dialog.dispose();
